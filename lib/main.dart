@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:studdyBuddyScreens/screens/Login.dart';
 import 'package:studdyBuddyScreens/screens/intro.dart';
 import 'package:studdyBuddyScreens/screens/maintenance.dart';
+import 'package:studdyBuddyScreens/screens/messages.dart';
 import 'package:studdyBuddyScreens/screens/register.dart';
 
 void main() {
@@ -30,7 +31,7 @@ class MyApp extends StatelessWidget {
         // closer together (more dense) than on mobile platforms.
         visualDensity: VisualDensity.adaptivePlatformDensity,
       ),
-      home: Maintenance(),
+      home: MessageList(),
     );
   }
 }

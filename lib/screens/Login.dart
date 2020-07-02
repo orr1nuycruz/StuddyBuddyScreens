@@ -29,42 +29,44 @@ class Login extends StatelessWidget {
                     child: Column(
                       children: <Widget>[
                         Material(
-                            borderRadius: const BorderRadius.all(
-                              const Radius.circular(25.0),
-                            ),
-                            elevation: 3,
-                            child: Container(
-                              width: 300,
-                              child: TextField(
-                                keyboardType: TextInputType.emailAddress,
-                                decoration: new InputDecoration(
-                                    border: new OutlineInputBorder(
-                                      borderRadius: const BorderRadius.all(
-                                        const Radius.circular(25.0),
-                                      ),
+                          borderRadius: const BorderRadius.all(
+                            const Radius.circular(25.0),
+                          ),
+                          elevation: 3,
+                          child: Container(
+                            width: 300,
+                            child: TextField(
+                              keyboardType: TextInputType.emailAddress,
+                              decoration: new InputDecoration(
+                                  border: new OutlineInputBorder(
+                                    borderRadius: const BorderRadius.all(
+                                      const Radius.circular(25.0),
                                     ),
-                                    hintText: "example@email.com"),
-                              ),
-                            )),
+                                  ),
+                                  hintText: "example@email.com"),
+                            ),
+                          ),
+                        ),
                         SizedBox(height: 10),
                         Material(
-                            borderRadius: const BorderRadius.all(
-                              const Radius.circular(25.0),
-                            ),
-                            elevation: 3,
-                            child: Container(
-                              width: 300,
-                              child: TextField(
-                                keyboardType: TextInputType.visiblePassword,
-                                decoration: new InputDecoration(
-                                    border: new OutlineInputBorder(
-                                      borderRadius: const BorderRadius.all(
-                                        const Radius.circular(25.0),
-                                      ),
+                          borderRadius: const BorderRadius.all(
+                            const Radius.circular(25.0),
+                          ),
+                          elevation: 3,
+                          child: Container(
+                            width: 300,
+                            child: TextField(
+                              keyboardType: TextInputType.visiblePassword,
+                              decoration: new InputDecoration(
+                                  border: new OutlineInputBorder(
+                                    borderRadius: const BorderRadius.all(
+                                      const Radius.circular(25.0),
                                     ),
-                                    hintText: "*******"),
-                              ),
-                            ),),
+                                  ),
+                                  hintText: "*******"),
+                            ),
+                          ),
+                        ),
                         SizedBox(height: 20),
                         RaisedButton(
                           padding: const EdgeInsets.all(0.0),
