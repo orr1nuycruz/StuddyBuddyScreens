@@ -5,6 +5,7 @@ import 'package:studdyBuddyScreens/screens/intro.dart';
 import 'package:studdyBuddyScreens/screens/maintenance.dart';
 import 'package:studdyBuddyScreens/screens/messages.dart';
 import 'package:studdyBuddyScreens/screens/register.dart';
+import 'package:studdyBuddyScreens/sharedWidgets/sizeConfig.dart';
 
 class BottomNavigatorPage extends StatefulWidget {
   @override
@@ -29,7 +30,10 @@ class _BottomNavigatorPageState extends State<BottomNavigatorPage> {
 
   @override
   Widget build(BuildContext context) {
+    
+    SizeConfig().init(context);
     return new Scaffold(
+      
       body: _children[_currentIndex],
       bottomNavigationBar: BottomNavigationBar(
         items: const <BottomNavigationBarItem>[

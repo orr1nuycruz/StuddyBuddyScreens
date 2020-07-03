@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:studdyBuddyScreens/model/user.dart';
 import 'package:studdyBuddyScreens/sharedWidgets/mascotImage.dart';
 import 'package:hexcolor/hexcolor.dart';
+import 'package:studdyBuddyScreens/sharedWidgets/sizeConfig.dart';
 
 class MessageList extends StatefulWidget {
   @override
@@ -16,8 +17,8 @@ class _MessageListState extends State<MessageList> {
     return InkWell(
       child: Container(
         decoration: BoxDecoration(),
-        width: 500,
-        height: 100.0,
+        width: SizeConfig.blockSizeHorizontal * 100,
+        height: SizeConfig.blockSizeVertical * 12.62,
         child: Card(
           color: Colors.white,
           child: Padding(
@@ -26,7 +27,7 @@ class _MessageListState extends State<MessageList> {
               bottom: 8.0,
             ),
             child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceAround,
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: <Widget>[
                 GestureDetector(
                   onTap: () {},
@@ -37,8 +38,7 @@ class _MessageListState extends State<MessageList> {
                     child: CircleAvatar(
                       backgroundImage: AssetImage(user.image),
                       backgroundColor: Colors.white,
-                      radius: 32,
-                      
+                      radius: SizeConfig.blockSizeHorizontal * 8,
                     ),
                   ),
                 ),
@@ -47,16 +47,17 @@ class _MessageListState extends State<MessageList> {
                   child: Column(
                     children: <Widget>[
                       Container(
-                        width: 155,
+                        width: SizeConfig.blockSizeHorizontal * 37,
                         child: new Text(
                           user.firstName + " " + user.lastName,
                           textAlign: TextAlign.left,
-                          style: TextStyle(color: Colors.black,
+                          style: TextStyle(
+                            color: Colors.black,
                           ),
                         ),
                       ),
                       Container(
-                        width: 155,
+                        width: SizeConfig.blockSizeHorizontal * 37,
                         child: new Text(
                           "Insert message here",
                           textAlign: TextAlign.left,
@@ -67,11 +68,17 @@ class _MessageListState extends State<MessageList> {
                   ),
                 ),
                 IconButton(
-                  icon: Icon(Icons.video_call, color: Colors.blue,),
+                  icon: Icon(
+                    Icons.video_call,
+                    color: Colors.blue,
+                  ),
                   onPressed: null,
                 ),
                 IconButton(
-                  icon: Icon(Icons.call, color: Colors.blue,),
+                  icon: Icon(
+                    Icons.call,
+                    color: Colors.blue,
+                  ),
                   onPressed: null,
                 ),
               ],
@@ -85,11 +92,13 @@ class _MessageListState extends State<MessageList> {
 
   @override
   Widget build(BuildContext context) {
+    SizeConfig().init(context);
     return Scaffold(
       body: Container(
-        padding: EdgeInsets.fromLTRB(0, 75, 0, 50),
+        padding: EdgeInsets.fromLTRB(0, SizeConfig.safeBlockVertical * 8, 0, 0),
         child: Center(
           child: Column(
+            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             children: <Widget>[
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
@@ -100,13 +109,13 @@ class _MessageListState extends State<MessageList> {
                     ),
                     elevation: 3,
                     child: Container(
-                      width: 255,
-                      height: 40,
+                      width: SizeConfig.blockSizeHorizontal * 60,
+                      height: SizeConfig.blockSizeVertical * 5.2,
                       child: TextField(
                         keyboardType: TextInputType.text,
                         decoration: new InputDecoration(
-                          contentPadding:
-                              const EdgeInsets.fromLTRB(25, 0, 0, 0),
+                          contentPadding: EdgeInsets.fromLTRB(
+                              SizeConfig.safeBlockVertical * 2, 0, 0, 0),
                           prefixIcon: Icon(Icons.search),
                           border: new OutlineInputBorder(
                             borderRadius: const BorderRadius.all(
@@ -114,8 +123,10 @@ class _MessageListState extends State<MessageList> {
                             ),
                           ),
                           hintText: "Search",
-                          hintStyle:
-                              TextStyle(color: Colors.grey, fontSize: 15),
+                          hintStyle: TextStyle(
+                            color: Colors.grey,
+                            fontSize: SizeConfig.safeBlockVertical * 2.1,
+                          ),
                         ),
                       ),
                     ),
@@ -128,10 +139,10 @@ class _MessageListState extends State<MessageList> {
                       elevation: 5,
                       child: CircleAvatar(
                         backgroundColor: Colors.white,
-                        radius: 32,
+                        radius: SizeConfig.blockSizeHorizontal * 8,
                         child: new Icon(
                           Icons.person,
-                          size: 25,
+                          size: SizeConfig.blockSizeHorizontal * 6,
                           color: Colors.grey,
                         ),
                       ),

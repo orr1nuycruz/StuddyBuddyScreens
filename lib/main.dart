@@ -5,6 +5,7 @@ import 'package:studdyBuddyScreens/screens/intro.dart';
 import 'package:studdyBuddyScreens/screens/maintenance.dart';
 import 'package:studdyBuddyScreens/screens/messages.dart';
 import 'package:studdyBuddyScreens/screens/register.dart';
+import 'package:studdyBuddyScreens/sharedWidgets/sizeConfig.dart';
 
 void main() {
   runApp(MyApp());

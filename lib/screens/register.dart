@@ -2,6 +2,7 @@ import 'package:dropdown_formfield/dropdown_formfield.dart';
 import 'package:flutter/material.dart';
 import 'package:studdyBuddyScreens/sharedWidgets/mascotImage.dart';
 import 'package:hexcolor/hexcolor.dart';
+import 'package:studdyBuddyScreens/sharedWidgets/sizeConfig.dart';
 
 class Register extends StatefulWidget {
   @override
@@ -15,15 +16,19 @@ class _RegisterState extends State<Register> {
 
   @override
   Widget build(BuildContext context) {
+    SizeConfig().init(context);
     return Scaffold(
       resizeToAvoidBottomPadding: false,
       body: Container(
-        padding: EdgeInsets.fromLTRB(0, 75, 0, 50),
+        height: SizeConfig.screenHeight,
+        width: SizeConfig.screenWidth,
+        padding: EdgeInsets.fromLTRB(0,
+            SizeConfig.safeBlockVertical * 2,0,0),
         child: Center(
           child: SingleChildScrollView(
             child: Column(
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: <Widget>[
-                SizedBox(height: 20),
                 GestureDetector(
                   onTap: () {},
                   child: Material(
@@ -32,16 +37,16 @@ class _RegisterState extends State<Register> {
                     elevation: 5,
                     child: CircleAvatar(
                       backgroundColor: Colors.white,
-                      radius: 60,
+                      radius: SizeConfig.blockSizeHorizontal * 13,
                       child: new Icon(
                         Icons.person,
-                        size: 50,
+                        size: SizeConfig.blockSizeHorizontal * 10,
                         color: Colors.grey,
                       ),
                     ),
                   ),
                 ),
-                SizedBox(height: 10),
+                SizedBox(height: SizeConfig.blockSizeVertical * 1),
                 Text(
                   "Add a Profile Picture",
                   style: TextStyle(
@@ -49,7 +54,7 @@ class _RegisterState extends State<Register> {
                     fontSize: 15,
                   ),
                 ),
-                SizedBox(height: 20),
+                SizedBox(height: SizeConfig.blockSizeVertical * 1),
                 Form(
                   key: _formKey,
                   child: Container(
@@ -62,8 +67,8 @@ class _RegisterState extends State<Register> {
                             ),
                             elevation: 3,
                             child: Container(
-                              height: 45,
-                              width: 350,
+                              height: SizeConfig.blockSizeVertical * 5,
+                              width: SizeConfig.blockSizeHorizontal * 85,
                               child: TextField(
                                 keyboardType: TextInputType.text,
                                 decoration: new InputDecoration(
@@ -80,15 +85,15 @@ class _RegisterState extends State<Register> {
                               ),
                             ),
                           ),
-                          SizedBox(height: 15),
+                          SizedBox(height: SizeConfig.blockSizeVertical * 2),
                           Material(
                             borderRadius: const BorderRadius.all(
                               const Radius.circular(30.0),
                             ),
                             elevation: 3,
                             child: Container(
-                              height: 45,
-                              width: 350,
+                              height: SizeConfig.blockSizeVertical * 5,
+                              width: SizeConfig.blockSizeHorizontal * 85,
                               child: TextField(
                                 keyboardType: TextInputType.text,
                                 decoration: new InputDecoration(
@@ -105,15 +110,15 @@ class _RegisterState extends State<Register> {
                               ),
                             ),
                           ),
-                          SizedBox(height: 15),
+                          SizedBox(height: SizeConfig.blockSizeVertical * 2),
                           Material(
                             borderRadius: const BorderRadius.all(
                               const Radius.circular(30.0),
                             ),
                             elevation: 3,
                             child: Container(
-                              height: 45,
-                              width: 350,
+                              height: SizeConfig.blockSizeVertical * 5,
+                              width: SizeConfig.blockSizeHorizontal * 85,
                               child: TextField(
                                 keyboardType: TextInputType.text,
                                 decoration: new InputDecoration(
@@ -130,15 +135,15 @@ class _RegisterState extends State<Register> {
                               ),
                             ),
                           ),
-                          SizedBox(height: 15),
+                          SizedBox(height: SizeConfig.blockSizeVertical * 2),
                           Material(
                             borderRadius: const BorderRadius.all(
                               const Radius.circular(30.0),
                             ),
                             elevation: 3,
                             child: Container(
-                              height: 45,
-                              width: 350,
+                              height: SizeConfig.blockSizeVertical * 5,
+                              width: SizeConfig.blockSizeHorizontal * 85,
                               child: TextField(
                                 keyboardType: TextInputType.text,
                                 decoration: new InputDecoration(
@@ -155,15 +160,15 @@ class _RegisterState extends State<Register> {
                               ),
                             ),
                           ),
-                          SizedBox(height: 15),
+                          SizedBox(height: SizeConfig.blockSizeVertical * 2),
                           Material(
                             borderRadius: const BorderRadius.all(
                               const Radius.circular(30.0),
                             ),
                             elevation: 3,
                             child: Container(
-                              height: 45,
-                              width: 350,
+                              height: SizeConfig.blockSizeVertical * 5,
+                              width: SizeConfig.blockSizeHorizontal * 85,
                               child: TextField(
                                 keyboardType: TextInputType.text,
                                 decoration: new InputDecoration(
@@ -180,7 +185,7 @@ class _RegisterState extends State<Register> {
                               ),
                             ),
                           ),
-                          SizedBox(height: 15),
+                          SizedBox(height: SizeConfig.blockSizeVertical * 2),
                           Row(
                             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                             children: <Widget>[
@@ -190,8 +195,8 @@ class _RegisterState extends State<Register> {
                                 ),
                                 elevation: 3,
                                 child: Container(
-                                  height: 45,
-                                  width: 160,
+                                  height: SizeConfig.blockSizeVertical * 5,
+                                  width: SizeConfig.blockSizeHorizontal * 38,
                                   child: TextField(
                                     keyboardType: TextInputType.number,
                                     decoration: new InputDecoration(
@@ -215,8 +220,8 @@ class _RegisterState extends State<Register> {
                                 ),
                                 elevation: 3,
                                 child: Container(
-                                  height: 45,
-                                  width: 160,
+                                  height: SizeConfig.blockSizeVertical * 5,
+                                  width: SizeConfig.blockSizeHorizontal * 38,
                                   child: TextField(
                                     keyboardType: TextInputType.text,
                                     decoration: new InputDecoration(
@@ -236,15 +241,15 @@ class _RegisterState extends State<Register> {
                               ),
                             ],
                           ),
-                          SizedBox(height: 15),
+                          SizedBox(height: SizeConfig.blockSizeVertical * 2),
                           Material(
                             borderRadius: const BorderRadius.all(
                               const Radius.circular(30.0),
                             ),
                             elevation: 3,
                             child: Container(
-                              height: 45,
-                              width: 350,
+                              height: SizeConfig.blockSizeVertical * 5,
+                              width: SizeConfig.blockSizeHorizontal * 85,
                               child: TextField(
                                 keyboardType: TextInputType.text,
                                 decoration: new InputDecoration(
@@ -261,9 +266,9 @@ class _RegisterState extends State<Register> {
                               ),
                             ),
                           ),
-                          SizedBox(height: 15),
+                          SizedBox(height: SizeConfig.blockSizeVertical * 1),
                           Container(
-                            width: 350,
+                            width: SizeConfig.blockSizeHorizontal * 85,
                             child: CheckboxListTile(
                               title: Text("I have read the terms and condition",
                                   style: TextStyle(color: Colors.grey)),
@@ -275,7 +280,7 @@ class _RegisterState extends State<Register> {
                               },
                             ),
                           ),
-                          SizedBox(height: 15),
+                          SizedBox(height: SizeConfig.blockSizeVertical * 2),
                           RaisedButton(
                             padding: const EdgeInsets.all(0.0),
                             shape: RoundedRectangleBorder(
@@ -295,7 +300,7 @@ class _RegisterState extends State<Register> {
                                   borderRadius: BorderRadius.circular(25),
                                 ),
                                 child: Center(
-                                  child: Text("Sign in",
+                                  child: Text("REGISTER",
                                       style: TextStyle(
                                           color: Colors.white, fontSize: 20)),
                                 ),

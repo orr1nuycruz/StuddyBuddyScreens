@@ -1,27 +1,33 @@
 import 'package:flutter/material.dart';
 import 'package:studdyBuddyScreens/sharedWidgets/mascotImage.dart';
 import 'package:hexcolor/hexcolor.dart';
+import 'package:studdyBuddyScreens/sharedWidgets/sizeConfig.dart';
 
 class Login extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
+    
+ SizeConfig().init(context);
     final _formKey = GlobalKey<FormState>();
     return Scaffold(
+      resizeToAvoidBottomPadding: false,
       body: Container(
-        padding: EdgeInsets.fromLTRB(0, 75, 0, 50),
+        height: SizeConfig.screenHeight,
+        width: SizeConfig.screenWidth,
+        padding: EdgeInsets.fromLTRB(SizeConfig.safeBlockHorizontal * 0, SizeConfig.safeBlockVertical * 5 , SizeConfig.safeBlockHorizontal * 0, SizeConfig.safeBlockVertical * 0),
         child: Center(
           child: Column(
+            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             children: <Widget>[
-              SizedBox(height: 10),
-              MascotImage(size: 250),
+              MascotImage(size: SizeConfig.blockSizeHorizontal * 50),
               Text(
                 "Greetings!",
                 style: TextStyle(
                     fontFamily: 'Open-Sans',
-                    fontSize: 50,
+                    fontSize: SizeConfig.safeBlockHorizontal*10.5,
                     fontWeight: FontWeight.bold),
               ),
-              SizedBox(height: 35),
+              SizedBox(height: SizeConfig.blockSizeVertical * 4.5),
               Form(
                 key: _formKey,
                 child: Container(
@@ -34,7 +40,7 @@ class Login extends StatelessWidget {
                           ),
                           elevation: 3,
                           child: Container(
-                            width: 300,
+                            width: SizeConfig.blockSizeHorizontal * 72,
                             child: TextField(
                               keyboardType: TextInputType.emailAddress,
                               decoration: new InputDecoration(
@@ -47,14 +53,14 @@ class Login extends StatelessWidget {
                             ),
                           ),
                         ),
-                        SizedBox(height: 10),
+                        SizedBox(height: SizeConfig.blockSizeVertical * 1.5),
                         Material(
                           borderRadius: const BorderRadius.all(
                             const Radius.circular(25.0),
                           ),
                           elevation: 3,
                           child: Container(
-                            width: 300,
+                            width: SizeConfig.blockSizeHorizontal * 72,
                             child: TextField(
                               keyboardType: TextInputType.visiblePassword,
                               decoration: new InputDecoration(
@@ -67,7 +73,7 @@ class Login extends StatelessWidget {
                             ),
                           ),
                         ),
-                        SizedBox(height: 20),
+                        SizedBox(height: SizeConfig.blockSizeVertical * 2.5),
                         RaisedButton(
                           padding: const EdgeInsets.all(0.0),
                           shape: RoundedRectangleBorder(
@@ -75,7 +81,7 @@ class Login extends StatelessWidget {
                             side: BorderSide(color: Colors.white),
                           ),
                           child: Container(
-                              width: 150,
+                              width: SizeConfig.blockSizeHorizontal * 35,
                               decoration: BoxDecoration(
                                 gradient: LinearGradient(
                                   colors: <Color>[
@@ -99,7 +105,7 @@ class Login extends StatelessWidget {
                   ),
                 ),
               ),
-              SizedBox(height: 20),
+              SizedBox(height: SizeConfig.blockSizeVertical * 3.0),
               RichText(
                 text: new TextSpan(children: [
                   new TextSpan(
