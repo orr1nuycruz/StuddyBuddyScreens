@@ -22,9 +22,9 @@ class _MessageListState extends State<MessageList> {
         child: Card(
           color: Colors.white,
           child: Padding(
-            padding: const EdgeInsets.only(
-              top: 8.0,
-              bottom: 8.0,
+            padding: EdgeInsets.only(
+              top: SizeConfig.safeBlockVertical * 1,
+              bottom: SizeConfig.safeBlockVertical * 2,
             ),
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
@@ -43,7 +43,8 @@ class _MessageListState extends State<MessageList> {
                   ),
                 ),
                 Container(
-                  padding: EdgeInsets.only(top: 20),
+                  padding:
+                      EdgeInsets.only(top: SizeConfig.safeBlockVertical * 3),
                   child: Column(
                     children: <Widget>[
                       Container(
@@ -53,6 +54,7 @@ class _MessageListState extends State<MessageList> {
                           textAlign: TextAlign.left,
                           style: TextStyle(
                             color: Colors.black,
+                            fontSize: SizeConfig.safeBlockHorizontal * 3.5,
                           ),
                         ),
                       ),
@@ -61,7 +63,9 @@ class _MessageListState extends State<MessageList> {
                         child: new Text(
                           "Insert message here",
                           textAlign: TextAlign.left,
-                          style: TextStyle(color: Colors.grey),
+                          style: TextStyle(
+                              color: Colors.grey,
+                              fontSize: SizeConfig.safeBlockHorizontal * 3.5),
                         ),
                       ),
                     ],

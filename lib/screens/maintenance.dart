@@ -7,17 +7,21 @@ import 'package:studdyBuddyScreens/sharedWidgets/sizeConfig.dart';
 class Maintenance extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    
- SizeConfig().init(context);
+    SizeConfig().init(context);
     return Scaffold(
       body: Container(
-       padding: EdgeInsets.fromLTRB(SizeConfig.safeBlockHorizontal * 0, SizeConfig.safeBlockVertical * 10 , SizeConfig.safeBlockHorizontal * 0, SizeConfig.safeBlockVertical * 0),
+        padding: EdgeInsets.fromLTRB(
+            SizeConfig.safeBlockHorizontal * 0,
+            SizeConfig.safeBlockVertical * 10,
+            SizeConfig.safeBlockHorizontal * 0,
+            SizeConfig.safeBlockVertical * 3),
         child: Center(
           child: Column(
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             children: <Widget>[
               Container(
-                padding: EdgeInsets.fromLTRB(0, 0,SizeConfig.safeBlockHorizontal * 10, 0),
+                padding: EdgeInsets.fromLTRB(
+                    0, 0, SizeConfig.safeBlockHorizontal * 10, 0),
                 child: Text(
                   "Hold up!",
                   style: TextStyle(
@@ -27,9 +31,9 @@ class Maintenance extends StatelessWidget {
                 ),
               ),
               MascotImage(size: SizeConfig.safeBlockHorizontal * 75),
-              SizedBox(height: SizeConfig.safeBlockHorizontal * 10),
               Container(
-                padding: EdgeInsets.fromLTRB(0, 0, 0, 0),
+                padding: EdgeInsets.fromLTRB(
+                    0, 0, 0, SizeConfig.safeBlockVertical * 6),
                 child: Text(
                   "StudyBuddy is undergoing maintenance. \n Sorry for the inconvinience",
                   textAlign: TextAlign.center,
@@ -39,11 +43,10 @@ class Maintenance extends StatelessWidget {
                       fontWeight: FontWeight.bold),
                 ),
               ),
-              SizedBox(height: SizeConfig.safeBlockHorizontal * 8),
               RaisedButton(
                 padding: const EdgeInsets.all(0.0),
                 shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(25.0),
+                  borderRadius: BorderRadius.circular(45.0),
                   side: BorderSide(color: Colors.white),
                 ),
                 child: Container(
@@ -56,17 +59,18 @@ class Maintenance extends StatelessWidget {
                           Hexcolor("#b9bffa")
                         ],
                       ),
-                      borderRadius: BorderRadius.circular(25),
+                      borderRadius: BorderRadius.circular(45),
                     ),
                     child: Center(
                       child: Text("Continue",
-                          style: TextStyle(color: Colors.white, fontSize: SizeConfig.safeBlockHorizontal * 6)),
+                          style: TextStyle(
+                              color: Colors.white,
+                              fontSize: SizeConfig.safeBlockHorizontal * 6)),
                     ),
-                    padding: const EdgeInsets.all(15.0)),
+                    padding:
+                        EdgeInsets.all(SizeConfig.safeBlockHorizontal * 4)),
                 onPressed: null,
               ),
-              
-              SizedBox(height: SizeConfig.blockSizeVertical * 2),
             ],
           ),
         ),

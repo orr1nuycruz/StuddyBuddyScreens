@@ -6,16 +6,18 @@ import 'package:studdyBuddyScreens/sharedWidgets/sizeConfig.dart';
 class Login extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    
- SizeConfig().init(context);
+    SizeConfig().init(context);
     final _formKey = GlobalKey<FormState>();
     return Scaffold(
-      resizeToAvoidBottomPadding: false,
+      resizeToAvoidBottomInset: false,
       body: Container(
-        height: SizeConfig.screenHeight,
-        width: SizeConfig.screenWidth,
-        padding: EdgeInsets.fromLTRB(SizeConfig.safeBlockHorizontal * 0, SizeConfig.safeBlockVertical * 5 , SizeConfig.safeBlockHorizontal * 0, SizeConfig.safeBlockVertical * 0),
+        padding: EdgeInsets.fromLTRB(
+            SizeConfig.safeBlockHorizontal * 0,
+            SizeConfig.safeBlockVertical * 5,
+            SizeConfig.safeBlockHorizontal * 0,
+            SizeConfig.safeBlockVertical * 5),
         child: Center(
+            child: SingleChildScrollView(
           child: Column(
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             children: <Widget>[
@@ -24,7 +26,7 @@ class Login extends StatelessWidget {
                 "Greetings!",
                 style: TextStyle(
                     fontFamily: 'Open-Sans',
-                    fontSize: SizeConfig.safeBlockHorizontal*10.5,
+                    fontSize: SizeConfig.safeBlockHorizontal * 10.5,
                     fontWeight: FontWeight.bold),
               ),
               SizedBox(height: SizeConfig.blockSizeVertical * 4.5),
@@ -36,37 +38,50 @@ class Login extends StatelessWidget {
                       children: <Widget>[
                         Material(
                           borderRadius: const BorderRadius.all(
-                            const Radius.circular(25.0),
+                            const Radius.circular(30.0),
                           ),
                           elevation: 3,
                           child: Container(
+                            height: SizeConfig.blockSizeVertical * 7.2,
                             width: SizeConfig.blockSizeHorizontal * 72,
                             child: TextField(
                               keyboardType: TextInputType.emailAddress,
                               decoration: new InputDecoration(
-                                  border: new OutlineInputBorder(
-                                    borderRadius: const BorderRadius.all(
-                                      const Radius.circular(25.0),
-                                    ),
+                                contentPadding: EdgeInsets.fromLTRB(
+                                    SizeConfig.safeBlockHorizontal * 4,
+                                    SizeConfig.safeBlockVertical * 3,
+                                    0,
+                                    SizeConfig.safeBlockVertical * 2),
+                                border: new OutlineInputBorder(
+                                  borderRadius: const BorderRadius.all(
+                                    const Radius.circular(30.0),
                                   ),
-                                  hintText: "example@email.com"),
+                                ),
+                                hintText: "example@email.com",
+                              ),
                             ),
                           ),
                         ),
                         SizedBox(height: SizeConfig.blockSizeVertical * 1.5),
                         Material(
                           borderRadius: const BorderRadius.all(
-                            const Radius.circular(25.0),
+                            const Radius.circular(30.0),
                           ),
                           elevation: 3,
                           child: Container(
+                            height: SizeConfig.blockSizeVertical * 7.2,
                             width: SizeConfig.blockSizeHorizontal * 72,
                             child: TextField(
                               keyboardType: TextInputType.visiblePassword,
                               decoration: new InputDecoration(
+                                  contentPadding: EdgeInsets.fromLTRB(
+                                      SizeConfig.safeBlockHorizontal * 4,
+                                      SizeConfig.safeBlockVertical * 3,
+                                      0,
+                                      SizeConfig.safeBlockVertical * 2),
                                   border: new OutlineInputBorder(
                                     borderRadius: const BorderRadius.all(
-                                      const Radius.circular(25.0),
+                                      const Radius.circular(30.0),
                                     ),
                                   ),
                                   hintText: "*******"),
@@ -119,7 +134,7 @@ class Login extends StatelessWidget {
               ),
             ],
           ),
-        ),
+        )),
       ),
     );
   }
