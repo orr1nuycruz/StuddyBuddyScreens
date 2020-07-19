@@ -3,6 +3,10 @@ import 'package:flutter/material.dart';
 import 'package:studdyBuddyScreens/sharedWidgets/mascotImage.dart';
 import 'package:hexcolor/hexcolor.dart';
 import 'package:studdyBuddyScreens/sharedWidgets/sizeConfig.dart';
+import 'package:flutter/material.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:flutter/services.dart';
+import 'package:studdyBuddyScreens/sharedWidgets/fullScreenSnackBar.dart';
 
 class Register extends StatefulWidget {
   @override
@@ -14,6 +18,11 @@ class _RegisterState extends State<Register> {
   String gender = 'Male';
   bool _isChecked = false;
 
+  final databaseReference = Firestore.instance;
+
+/*Consider implementing google sign in later */
+
+  final _scaffoldKey = GlobalKey<ScaffoldState>();
   @override
   Widget build(BuildContext context) {
     SizeConfig().init(context);
