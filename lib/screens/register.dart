@@ -68,6 +68,8 @@ class _RegisterState extends State<Register> {
                   fontSize: SizeConfig.blockSizeHorizontal * 4,
                 ),
               ),
+
+              //FORM SECTION
               SizedBox(height: SizeConfig.safeBlockVertical * 1),
               Form(
                 key: _formKey,
@@ -86,8 +88,8 @@ class _RegisterState extends State<Register> {
                             child: TextFormField(
                               keyboardType: TextInputType.text,
                               decoration: new InputDecoration(
-                                  contentPadding:
-                                      const EdgeInsets.fromLTRB(25, 0, 0, 0),
+                                  contentPadding: EdgeInsets.only(
+                                      left: SizeConfig.safeBlockHorizontal * 6),
                                   border: new OutlineInputBorder(
                                     borderSide: BorderSide(color: Colors.white),
                                     borderRadius: const BorderRadius.all(
@@ -120,8 +122,8 @@ class _RegisterState extends State<Register> {
                             child: TextFormField(
                               keyboardType: TextInputType.text,
                               decoration: new InputDecoration(
-                                  contentPadding:
-                                      const EdgeInsets.fromLTRB(25, 0, 0, 0),
+                                  contentPadding: EdgeInsets.only(
+                                      left: SizeConfig.safeBlockHorizontal * 6),
                                   border: new OutlineInputBorder(
                                     borderSide: BorderSide(color: Colors.white),
                                     borderRadius: const BorderRadius.all(
@@ -154,8 +156,8 @@ class _RegisterState extends State<Register> {
                             child: TextFormField(
                               keyboardType: TextInputType.emailAddress,
                               decoration: new InputDecoration(
-                                  contentPadding:
-                                      const EdgeInsets.fromLTRB(25, 0, 0, 0),
+                                  contentPadding: EdgeInsets.only(
+                                      left: SizeConfig.safeBlockHorizontal * 6),
                                   border: new OutlineInputBorder(
                                     borderSide: BorderSide(color: Colors.white),
                                     borderRadius: const BorderRadius.all(
@@ -191,8 +193,8 @@ class _RegisterState extends State<Register> {
                               obscureText: true,
                               keyboardType: TextInputType.visiblePassword,
                               decoration: new InputDecoration(
-                                  contentPadding:
-                                      const EdgeInsets.fromLTRB(25, 0, 0, 0),
+                                  contentPadding: EdgeInsets.only(
+                                      left: SizeConfig.safeBlockHorizontal * 6),
                                   border: new OutlineInputBorder(
                                     borderSide: BorderSide(color: Colors.white),
                                     borderRadius: const BorderRadius.all(
@@ -228,8 +230,8 @@ class _RegisterState extends State<Register> {
                               obscureText: true,
                               keyboardType: TextInputType.visiblePassword,
                               decoration: new InputDecoration(
-                                  contentPadding:
-                                      const EdgeInsets.fromLTRB(25, 0, 0, 0),
+                                  contentPadding: EdgeInsets.only(
+                                      left: SizeConfig.safeBlockHorizontal * 6),
                                   border: new OutlineInputBorder(
                                     borderSide: BorderSide(color: Colors.white),
                                     borderRadius: const BorderRadius.all(
@@ -267,8 +269,9 @@ class _RegisterState extends State<Register> {
                                 child: TextFormField(
                                   keyboardType: TextInputType.number,
                                   decoration: new InputDecoration(
-                                      contentPadding: const EdgeInsets.fromLTRB(
-                                          25, 0, 0, 0),
+                                      contentPadding: EdgeInsets.only(
+                                          left: SizeConfig.safeBlockHorizontal *
+                                              6),
                                       border: new OutlineInputBorder(
                                         borderSide:
                                             BorderSide(color: Colors.white),
@@ -298,30 +301,63 @@ class _RegisterState extends State<Register> {
                               child: Container(
                                 height: SizeConfig.blockSizeVertical * 5,
                                 width: SizeConfig.blockSizeHorizontal * 38,
-                                child: TextFormField(
-                                  keyboardType: TextInputType.text,
-                                  decoration: new InputDecoration(
-                                      contentPadding: const EdgeInsets.fromLTRB(
-                                          25, 0, 0, 0),
-                                      border: new OutlineInputBorder(
-                                        borderSide:
-                                            BorderSide(color: Colors.white),
-                                        borderRadius: const BorderRadius.all(
-                                          const Radius.circular(30.0),
-                                        ),
-                                      ),
-                                      hintText: "Gender"),
-                                  validator: (String value) {
-                                    if (value.isEmpty) {
-                                      return "Cannot be empty";
-                                    } else {
-                                      setState(() {
-                                        User.gender = value;
-                                      });
-                                      return null;
-                                    }
-                                  },
+                                decoration: BoxDecoration(
+                                  border: Border.all(color: Colors.grey),
+                                  borderRadius: const BorderRadius.all(
+                                    const Radius.circular(30.0),
+                                  ),
                                 ),
+                                child: Padding(
+                                  padding: EdgeInsets.only(
+                                      left: SizeConfig.safeBlockHorizontal * 6),
+                                  child: DropdownButton(
+                                      underline: SizedBox(),
+                                      isExpanded: true,
+                                      value: gender,
+                                      hint: Text(gender),
+                                      style: TextStyle(color: Colors.grey),
+                                      items: [
+                                        DropdownMenuItem(
+                                            child: Text("Male"), value: "Male"),
+                                        DropdownMenuItem(
+                                            child: Text("Female"),
+                                            value: "Female"),
+                                        DropdownMenuItem(
+                                            child: Text("Other"),
+                                            value: "Other"),
+                                      ],
+                                      onChanged: (String value) {
+                                        setState(() {
+                                          gender = value;
+                                          User.gender = gender;
+                                        });
+                                      }),
+                                ),
+
+                                // child: TextFormField(
+                                //   keyboardType: TextInputType.text,
+                                //   decoration: new InputDecoration(
+                                //       contentPadding: const EdgeInsets.fromLTRB(
+                                //           25, 0, 0, 0),
+                                //       border: new OutlineInputBorder(
+                                //         borderSide:
+                                //             BorderSide(color: Colors.white),
+                                //         borderRadius: const BorderRadius.all(
+                                //           const Radius.circular(30.0),
+                                //         ),
+                                //       ),
+                                //       hintText: "Gender"),
+                                //   validator: (String value) {
+                                //     if (value.isEmpty) {
+                                //       return "Cannot be empty";
+                                //     } else {
+                                //       setState(() {
+                                //         User.gender = value;
+                                //       });
+                                //       return null;
+                                //     }
+                                //   },
+                                // ),
                               ),
                             ),
                           ],
@@ -338,8 +374,8 @@ class _RegisterState extends State<Register> {
                             child: TextFormField(
                               keyboardType: TextInputType.text,
                               decoration: new InputDecoration(
-                                  contentPadding:
-                                      const EdgeInsets.fromLTRB(25, 0, 0, 0),
+                                  contentPadding: EdgeInsets.only(
+                                      left: SizeConfig.safeBlockHorizontal * 6),
                                   border: new OutlineInputBorder(
                                     borderSide: BorderSide(color: Colors.white),
                                     borderRadius: const BorderRadius.all(
@@ -371,6 +407,12 @@ class _RegisterState extends State<Register> {
                                       SizeConfig.safeBlockHorizontal * 3.5,
                                 )),
                             value: _isChecked,
+                            subtitle: !_isChecked
+                                ? Text(
+                                    'Required.',
+                                    style: TextStyle(color: Colors.red),
+                                  )
+                                : null,
                             onChanged: (val) {
                               setState(() {
                                 _isChecked = val;
@@ -410,7 +452,14 @@ class _RegisterState extends State<Register> {
                           onPressed: () {
                             if (this._formKey.currentState.validate() &&
                                 _isChecked) {
-                              print("everything is working");
+                              print("everything is working " +
+                                  "\n ${User.firstName}"
+                                      "\n ${User.lastName}"
+                                      "\n ${User.password}"
+                                      "\n ${User.email}"
+                                      "\n ${User.age}"
+                                      "\n ${User.gender}"
+                                      "\n ${User.city}");
                             } else {
                               print(
                                   "MAke sure to check the terms and conditions");
