@@ -1,5 +1,6 @@
 import 'package:dropdown_formfield/dropdown_formfield.dart';
 import 'package:flutter/material.dart';
+import 'package:studdyBuddyScreens/model/testUser.dart';
 import 'package:studdyBuddyScreens/model/user.dart';
 import 'package:studdyBuddyScreens/sharedWidgets/mascotImage.dart';
 import 'package:hexcolor/hexcolor.dart';
@@ -11,9 +12,9 @@ class MessageList extends StatefulWidget {
 }
 
 class _MessageListState extends State<MessageList> {
-  final List<User> getUsers = User.userList();
+  final List<TestUser> getUsers = TestUser.userList();
 
-  Widget userCard(User user, BuildContext context) {
+  Widget userCard(TestUser user, BuildContext context) {
     return InkWell(
       child: Container(
         decoration: BoxDecoration(),

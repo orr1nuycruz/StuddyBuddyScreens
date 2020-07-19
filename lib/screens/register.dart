@@ -1,5 +1,8 @@
+import 'dart:convert';
+
 import 'package:dropdown_formfield/dropdown_formfield.dart';
 import 'package:flutter/material.dart';
+import 'package:studdyBuddyScreens/model/user.dart';
 import 'package:studdyBuddyScreens/sharedWidgets/mascotImage.dart';
 import 'package:hexcolor/hexcolor.dart';
 import 'package:studdyBuddyScreens/sharedWidgets/sizeConfig.dart';
@@ -16,6 +19,7 @@ class Register extends StatefulWidget {
 class _RegisterState extends State<Register> {
   final _formKey = GlobalKey<FormState>();
   String gender = 'Male';
+  String initialPassword = null;
   bool _isChecked = false;
 
   final databaseReference = Firestore.instance;
@@ -27,6 +31,7 @@ class _RegisterState extends State<Register> {
   Widget build(BuildContext context) {
     SizeConfig().init(context);
     return Scaffold(
+      key: _scaffoldKey,
       resizeToAvoidBottomInset: false,
       body: Container(
         height: SizeConfig.screenHeight,
@@ -78,7 +83,7 @@ class _RegisterState extends State<Register> {
                           child: Container(
                             height: SizeConfig.blockSizeVertical * 5,
                             width: SizeConfig.blockSizeHorizontal * 85,
-                            child: TextField(
+                            child: TextFormField(
                               keyboardType: TextInputType.text,
                               decoration: new InputDecoration(
                                   contentPadding:
@@ -90,6 +95,16 @@ class _RegisterState extends State<Register> {
                                     ),
                                   ),
                                   hintText: "First Name"),
+                              validator: (String value) {
+                                if (value.isEmpty) {
+                                  return "Cannot be empty";
+                                } else {
+                                  setState(() {
+                                    User.firstName = value;
+                                  });
+                                  return null;
+                                }
+                              },
                             ),
                           ),
                         ),
@@ -102,7 +117,7 @@ class _RegisterState extends State<Register> {
                           child: Container(
                             height: SizeConfig.blockSizeVertical * 5,
                             width: SizeConfig.blockSizeHorizontal * 85,
-                            child: TextField(
+                            child: TextFormField(
                               keyboardType: TextInputType.text,
                               decoration: new InputDecoration(
                                   contentPadding:
@@ -114,6 +129,16 @@ class _RegisterState extends State<Register> {
                                     ),
                                   ),
                                   hintText: "Last Name"),
+                              validator: (String value) {
+                                if (value.isEmpty) {
+                                  return "Cannot be empty";
+                                } else {
+                                  setState(() {
+                                    User.lastName = value;
+                                  });
+                                  return null;
+                                }
+                              },
                             ),
                           ),
                         ),
@@ -126,8 +151,8 @@ class _RegisterState extends State<Register> {
                           child: Container(
                             height: SizeConfig.blockSizeVertical * 5,
                             width: SizeConfig.blockSizeHorizontal * 85,
-                            child: TextField(
-                              keyboardType: TextInputType.text,
+                            child: TextFormField(
+                              keyboardType: TextInputType.emailAddress,
                               decoration: new InputDecoration(
                                   contentPadding:
                                       const EdgeInsets.fromLTRB(25, 0, 0, 0),
@@ -138,6 +163,18 @@ class _RegisterState extends State<Register> {
                                     ),
                                   ),
                                   hintText: "Email Address"),
+                              validator: (String value) {
+                                if (value.isEmpty) {
+                                  return "Cannot be empty";
+                                } else if (!isValidEmail(value)) {
+                                  return "Invalid Email";
+                                } else {
+                                  setState(() {
+                                    User.email = value;
+                                  });
+                                  return null;
+                                }
+                              },
                             ),
                           ),
                         ),
@@ -150,8 +187,9 @@ class _RegisterState extends State<Register> {
                           child: Container(
                             height: SizeConfig.blockSizeVertical * 5,
                             width: SizeConfig.blockSizeHorizontal * 85,
-                            child: TextField(
-                              keyboardType: TextInputType.text,
+                            child: TextFormField(
+                              obscureText: true,
+                              keyboardType: TextInputType.visiblePassword,
                               decoration: new InputDecoration(
                                   contentPadding:
                                       const EdgeInsets.fromLTRB(25, 0, 0, 0),
@@ -162,6 +200,18 @@ class _RegisterState extends State<Register> {
                                     ),
                                   ),
                                   hintText: "Password"),
+                              validator: (String value) {
+                                if (value.isEmpty) {
+                                  return 'Please enter password';
+                                }
+                                if (value.length <= 6) {
+                                  return 'Password must be greater than 6 characters';
+                                }
+                                setState(() {
+                                  initialPassword = value;
+                                });
+                                return null;
+                              },
                             ),
                           ),
                         ),
@@ -174,8 +224,9 @@ class _RegisterState extends State<Register> {
                           child: Container(
                             height: SizeConfig.blockSizeVertical * 5,
                             width: SizeConfig.blockSizeHorizontal * 85,
-                            child: TextField(
-                              keyboardType: TextInputType.text,
+                            child: TextFormField(
+                              obscureText: true,
+                              keyboardType: TextInputType.visiblePassword,
                               decoration: new InputDecoration(
                                   contentPadding:
                                       const EdgeInsets.fromLTRB(25, 0, 0, 0),
@@ -186,6 +237,18 @@ class _RegisterState extends State<Register> {
                                     ),
                                   ),
                                   hintText: "Confirm Password"),
+                              validator: (String value) {
+                                if (value.isEmpty) {
+                                  return 'Please enter password';
+                                } else if (value != initialPassword) {
+                                  return 'Password does not match';
+                                } else {
+                                  setState(() {
+                                    User.password = value;
+                                  });
+                                  return null;
+                                }
+                              },
                             ),
                           ),
                         ),
@@ -201,7 +264,7 @@ class _RegisterState extends State<Register> {
                               child: Container(
                                 height: SizeConfig.blockSizeVertical * 5,
                                 width: SizeConfig.blockSizeHorizontal * 38,
-                                child: TextField(
+                                child: TextFormField(
                                   keyboardType: TextInputType.number,
                                   decoration: new InputDecoration(
                                       contentPadding: const EdgeInsets.fromLTRB(
@@ -214,6 +277,16 @@ class _RegisterState extends State<Register> {
                                         ),
                                       ),
                                       hintText: "Age"),
+                                  validator: (String value) {
+                                    if (value.isEmpty) {
+                                      return "Cannot be empty";
+                                    } else {
+                                      setState(() {
+                                        User.age = int.parse(value);
+                                      });
+                                      return null;
+                                    }
+                                  },
                                 ),
                               ),
                             ),
@@ -225,7 +298,7 @@ class _RegisterState extends State<Register> {
                               child: Container(
                                 height: SizeConfig.blockSizeVertical * 5,
                                 width: SizeConfig.blockSizeHorizontal * 38,
-                                child: TextField(
+                                child: TextFormField(
                                   keyboardType: TextInputType.text,
                                   decoration: new InputDecoration(
                                       contentPadding: const EdgeInsets.fromLTRB(
@@ -238,6 +311,16 @@ class _RegisterState extends State<Register> {
                                         ),
                                       ),
                                       hintText: "Gender"),
+                                  validator: (String value) {
+                                    if (value.isEmpty) {
+                                      return "Cannot be empty";
+                                    } else {
+                                      setState(() {
+                                        User.gender = value;
+                                      });
+                                      return null;
+                                    }
+                                  },
                                 ),
                               ),
                             ),
@@ -252,7 +335,7 @@ class _RegisterState extends State<Register> {
                           child: Container(
                             height: SizeConfig.blockSizeVertical * 5,
                             width: SizeConfig.blockSizeHorizontal * 85,
-                            child: TextField(
+                            child: TextFormField(
                               keyboardType: TextInputType.text,
                               decoration: new InputDecoration(
                                   contentPadding:
@@ -263,7 +346,17 @@ class _RegisterState extends State<Register> {
                                       const Radius.circular(30.0),
                                     ),
                                   ),
-                                  hintText: "Select City"),
+                                  hintText: "Enter City"),
+                              validator: (String value) {
+                                if (value.isEmpty) {
+                                  return "Cannot be empty";
+                                } else {
+                                  setState(() {
+                                    User.city = value;
+                                  });
+                                  return null;
+                                }
+                              },
                             ),
                           ),
                         ),
@@ -271,7 +364,7 @@ class _RegisterState extends State<Register> {
                           height: SizeConfig.blockSizeVertical * 7.2,
                           width: SizeConfig.blockSizeHorizontal * 85,
                           child: CheckboxListTile(
-                            title: Text("I have read the terms and condition",
+                            title: Text("I have read the terms and conditions",
                                 style: TextStyle(
                                   color: Colors.grey,
                                   fontSize:
@@ -289,7 +382,7 @@ class _RegisterState extends State<Register> {
                         RaisedButton(
                           padding: const EdgeInsets.all(0.0),
                           shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(25.0),
+                            borderRadius: BorderRadius.circular(30.0),
                             side: BorderSide(color: Colors.white),
                           ),
                           child: Container(
@@ -314,7 +407,15 @@ class _RegisterState extends State<Register> {
                               ),
                               padding: EdgeInsets.all(
                                   SizeConfig.safeBlockHorizontal * 3)),
-                          onPressed: null,
+                          onPressed: () {
+                            if (this._formKey.currentState.validate() &&
+                                _isChecked) {
+                              print("everything is working");
+                            } else {
+                              print(
+                                  "MAke sure to check the terms and conditions");
+                            }
+                          },
                         ),
                       ],
                     ),
@@ -326,5 +427,11 @@ class _RegisterState extends State<Register> {
         )),
       ),
     );
+  }
+
+  bool isValidEmail(String input) {
+    final RegExp regex = new RegExp(
+        r"^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,253}[a-zA-Z0-9])?(?:\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,253}[a-zA-Z0-9])?)*$");
+    return regex.hasMatch(input);
   }
 }
