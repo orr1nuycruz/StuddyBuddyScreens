@@ -1,12 +1,9 @@
-import 'dart:convert';
-
-import 'package:dropdown_formfield/dropdown_formfield.dart';
 import 'package:flutter/material.dart';
+import 'package:studdyBuddyScreens/model/BaseAuth.dart';
 import 'package:studdyBuddyScreens/model/user.dart';
 import 'package:studdyBuddyScreens/sharedWidgets/mascotImage.dart';
 import 'package:hexcolor/hexcolor.dart';
 import 'package:studdyBuddyScreens/sharedWidgets/sizeConfig.dart';
-import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/services.dart';
 import 'package:studdyBuddyScreens/sharedWidgets/fullScreenSnackBar.dart';
@@ -18,13 +15,75 @@ class Register extends StatefulWidget {
 
 class _RegisterState extends State<Register> {
   final _formKey = GlobalKey<FormState>();
-  String gender = 'Male';
   String initialPassword = null;
   bool _isChecked = false;
 
   final databaseReference = Firestore.instance;
 
+  @override
+  void initState() {
+    User.gender = "Male";
+    super.initState();
+  }
+
 /*Consider implementing google sign in later */
+
+  void createUser() async {
+    final status = await Auth().checkUserExists(User.email);
+    /*If new user does not exists in the system */
+    if (status == false) {
+      _scaffoldKey.currentState.showSnackBar(SnackBar(
+        duration: Duration(days: 1),
+        content: FullScreenSnackBar(
+          icon: Icons.thumb_up,
+          genericText: "Hi ${User.firstName}, Please Verify Your Email ",
+          inkButtonText: "<- To Login",
+          function: () {
+            // MaterialPageRoute route =
+            //     MaterialPageRoute(builder: (context) => Login());
+            // Navigator.of(context).push(route).then((value) => _formKey.currentState.reset());
+            Navigator.of(context).pop();
+          },
+        ),
+      ));
+
+      Auth()
+          .signUp(User.email, User.password)
+          .then((user) => Auth().sendEmailVerification())
+          .catchError((onError) => print("invalid"));
+
+      databaseReference.collection("MainsUsers").document(User.email).setData({
+        'First Name': User.firstName,
+        'Last Name': User.lastName,
+        "Age": User.age.toString(),
+        "Gender": User.gender,
+        "City": User.city
+      });
+    } else {
+      _scaffoldKey.currentState.showSnackBar(SnackBar(
+        duration: Duration(days: 1),
+        backgroundColor: Theme.of(context).errorColor,
+        content: FullScreenSnackBar(
+            icon: Icons.thumb_down,
+            genericText:
+                "Hi ${User.firstName}, we are unable to register you because...\n" +
+                    "\n-Pre-existing account\n-An unverified account\n-Poor Connection",
+            inkButtonText: "<- Back To Login",
+            function: () {
+              // MaterialPageRoute route =
+              //     MaterialPageRoute(builder: (context) => Login());
+              // Navigator.of(context).push(route);
+              Navigator.of(context).pop();
+            },
+            inkButtonText2: "<- Back to Register",
+            function2: () {
+              MaterialPageRoute route =
+                  MaterialPageRoute(builder: (context) => Register());
+              Navigator.of(context).pop(route);
+            }),
+      ));
+    }
+  }
 
   final _scaffoldKey = GlobalKey<ScaffoldState>();
   @override
@@ -313,8 +372,8 @@ class _RegisterState extends State<Register> {
                                   child: DropdownButton(
                                       underline: SizedBox(),
                                       isExpanded: true,
-                                      value: gender,
-                                      hint: Text(gender),
+                                      value: User.gender,
+                                      hint: Text("Select Gender"),
                                       style: TextStyle(color: Colors.grey),
                                       items: [
                                         DropdownMenuItem(
@@ -328,36 +387,10 @@ class _RegisterState extends State<Register> {
                                       ],
                                       onChanged: (String value) {
                                         setState(() {
-                                          gender = value;
-                                          User.gender = gender;
+                                          User.gender = value;
                                         });
                                       }),
                                 ),
-
-                                // child: TextFormField(
-                                //   keyboardType: TextInputType.text,
-                                //   decoration: new InputDecoration(
-                                //       contentPadding: const EdgeInsets.fromLTRB(
-                                //           25, 0, 0, 0),
-                                //       border: new OutlineInputBorder(
-                                //         borderSide:
-                                //             BorderSide(color: Colors.white),
-                                //         borderRadius: const BorderRadius.all(
-                                //           const Radius.circular(30.0),
-                                //         ),
-                                //       ),
-                                //       hintText: "Gender"),
-                                //   validator: (String value) {
-                                //     if (value.isEmpty) {
-                                //       return "Cannot be empty";
-                                //     } else {
-                                //       setState(() {
-                                //         User.gender = value;
-                                //       });
-                                //       return null;
-                                //     }
-                                //   },
-                                // ),
                               ),
                             ),
                           ],
@@ -460,9 +493,10 @@ class _RegisterState extends State<Register> {
                                       "\n ${User.age}"
                                       "\n ${User.gender}"
                                       "\n ${User.city}");
+                              createUser();
                             } else {
                               print(
-                                  "MAke sure to check the terms and conditions");
+                                  "Make sure to check the terms and conditions");
                             }
                           },
                         ),
