@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:studdyBuddyScreens/sharedWidgets/sizeConfig.dart';
 
 class FullScreenSnackBar extends StatelessWidget {
   final IconData icon;
@@ -22,6 +23,7 @@ class FullScreenSnackBar extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    SizeConfig().init(context);
     return Center(
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
@@ -29,11 +31,11 @@ class FullScreenSnackBar extends StatelessWidget {
           /*Consider making it clickable to mail */
           Icon(
             icon,
-            size: 100,
+            size: SizeConfig.blockSizeHorizontal * 30,
             color: Colors.white,
           ),
           SizedBox(
-            height: 10,
+            height: SizeConfig.safeBlockVertical * 5,
           ),
           Row(
             mainAxisSize: MainAxisSize.min,
@@ -41,33 +43,40 @@ class FullScreenSnackBar extends StatelessWidget {
               Container(
                 child: isExpanded == true
                     ? Expanded(
-                        child: Text(
-                          genericText,
-                        ),
+                        child: Text(genericText,
+                            style: new TextStyle(
+                                fontSize:
+                                    SizeConfig.blockSizeHorizontal * 3.8)),
                       )
-                    : Text(genericText),
+                    : Text(genericText,
+                        style: new TextStyle(
+                            fontSize: SizeConfig.blockSizeHorizontal * 3.8)),
               ),
             ],
           ),
           SizedBox(
-            height: 10,
+            height: SizeConfig.safeBlockVertical * 5,
           ),
           inkButtonText != null
               ? InkWell(
                   child: Text(
                     inkButtonText,
-                    style: TextStyle(fontWeight: FontWeight.bold),
+                    style: TextStyle(
+                        fontWeight: FontWeight.bold,
+                        fontSize: SizeConfig.blockSizeHorizontal * 3.8),
                   ),
                   onTap: function)
               : Text(""),
           SizedBox(
-            height: 10,
+            height: SizeConfig.safeBlockVertical * 1.5,
           ),
           inkButtonText2 != null
               ? InkWell(
                   child: Text(
                     inkButtonText2,
-                    style: TextStyle(fontWeight: FontWeight.bold),
+                    style: TextStyle(
+                        fontWeight: FontWeight.bold,
+                        fontSize: SizeConfig.blockSizeHorizontal * 3.8),
                   ),
                   onTap: function2)
               : Text(""),

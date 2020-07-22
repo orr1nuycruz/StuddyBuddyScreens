@@ -1,14 +1,178 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
+import 'package:studdyBuddyScreens/model/BaseAuth.dart';
+import 'package:studdyBuddyScreens/model/user.dart';
+import 'package:studdyBuddyScreens/screens/register.dart';
+import 'package:studdyBuddyScreens/sharedWidgets/fullScreenSnackBar.dart';
 import 'package:studdyBuddyScreens/sharedWidgets/mascotImage.dart';
 import 'package:hexcolor/hexcolor.dart';
 import 'package:studdyBuddyScreens/sharedWidgets/sizeConfig.dart';
 
-class Login extends StatelessWidget {
+class Login extends StatefulWidget {
+  @override
+  _LoginState createState() => _LoginState();
+}
+
+class _LoginState extends State<Login> {
+  final _scaffoldKey = GlobalKey<ScaffoldState>();
+  final _formKey = GlobalKey<FormState>();
+
+  void signInUser(String email, String password) async {
+    int lastIndex = email.indexOf("@");
+    String compressedEmail = email.substring(0, lastIndex);
+
+    //Sign in
+    try {
+      await Auth().signIn(email, password);
+    } on PlatformException catch (e) {
+      switch (e.code) {
+        case "ERROR_WRONG_PASSWORD":
+          _scaffoldKey.currentState.showSnackBar(SnackBar(
+            duration: Duration(days: 1),
+            backgroundColor: Theme.of(context).errorColor,
+            content: FullScreenSnackBar(
+              icon: Icons.thumb_down,
+              isExpanded: true,
+              genericText:
+                  "Hi $compressedEmail, we are unable to log you in because...\n" +
+                      "\n-Wrong Password",
+              inkButtonText: "<- Back To Login",
+              function: () {
+                MaterialPageRoute route =
+                    MaterialPageRoute(builder: (context) => Login());
+                Navigator.of(context).pushReplacement(route);
+                _scaffoldKey.currentState.hideCurrentSnackBar();
+              },
+            ),
+          ));
+          return print("ERROR_WRONG_PASSWORD");
+          break;
+
+        case "ERROR_USER_NOT_FOUND":
+          _scaffoldKey.currentState.showSnackBar(SnackBar(
+            duration: Duration(days: 1),
+            backgroundColor: Theme.of(context).errorColor,
+            content: FullScreenSnackBar(
+              icon: Icons.thumb_down,
+              isExpanded: true,
+              genericText:
+                  "Hi $compressedEmail, we are unable to log you in because...\n" +
+                      "\n-User does not exist",
+              inkButtonText: "<- Back To Login",
+              function: () {
+                MaterialPageRoute route =
+                    MaterialPageRoute(builder: (context) => Login());
+                Navigator.of(context).pushReplacement(route);
+              },
+              inkButtonText2: "<- To Register",
+              function2: () {
+                MaterialPageRoute route =
+                    MaterialPageRoute(builder: (context) => Register());
+                Navigator.of(context).push(route);
+              },
+            ),
+          ));
+          return print("ERROR_USER_NOT_FOUND");
+          break;
+
+        case "ERROR_NETWORK_REQUEST":
+          _scaffoldKey.currentState.showSnackBar(SnackBar(
+            duration: Duration(days: 1),
+            backgroundColor: Theme.of(context).errorColor,
+            content: FullScreenSnackBar(
+              icon: Icons.signal_wifi_off,
+              isExpanded: true,
+              genericText:
+                  "Hi $compressedEmail, we are unable to log you in because...\n" +
+                      "\n-Poor Connection",
+              inkButtonText: "<- Back To Login",
+              function: () {
+                MaterialPageRoute route =
+                    MaterialPageRoute(builder: (context) => Login());
+                Navigator.of(context).pushReplacement(route);
+                _scaffoldKey.currentState.hideCurrentSnackBar();
+              },
+            ),
+          ));
+          return print("ERROR_NETWORK_REQUEST");
+          break;
+        default:
+          _scaffoldKey.currentState.showSnackBar(SnackBar(
+            duration: Duration(days: 1),
+            backgroundColor: Theme.of(context).errorColor,
+            content: FullScreenSnackBar(
+                icon: Icons.do_not_disturb,
+                genericText:
+                    "Hi $compressedEmail, we are unable to Log you in for unknown reasons...\n" +
+                        "\n-Please contact an Admin @ jnguessa@uoguelph.ca",
+                inkButtonText: "<- Back To Login",
+                function: () {
+                  MaterialPageRoute route =
+                      MaterialPageRoute(builder: (context) => Login());
+                  Navigator.of(context).pushReplacement(route);
+                  _scaffoldKey.currentState.hideCurrentSnackBar();
+                },
+                inkButtonText2: "<- Back to Register",
+                function2: () {
+                  MaterialPageRoute route =
+                      MaterialPageRoute(builder: (context) => Register());
+                  Navigator.of(context).push(route);
+                }),
+          ));
+
+          return print("Unknwon reason");
+          break;
+      }
+    }
+    /*At this point, the user is has the correct credential
+    Logged in, but can't see content
+    */
+    Auth().getCurrentUser().then((firebaseUser) {
+      switch (firebaseUser.isEmailVerified) {
+        case true:
+          /*Go to calendar screen */
+          _scaffoldKey.currentState.showSnackBar(SnackBar(
+              duration: Duration(days: 1),
+              backgroundColor: Colors.green,
+              content: FullScreenSnackBar(
+                  icon: Icons.do_not_disturb,
+                  genericText:
+                      "This account exists, which means that login functionality is working properly",
+                  inkButtonText: "<- Back To Login",
+                  function: () {
+                    MaterialPageRoute route =
+                        MaterialPageRoute(builder: (context) => Login());
+                    Navigator.of(context).pushReplacement(route);
+                    _formKey.currentState.reset();
+                  })));
+
+          break;
+        case false:
+          _scaffoldKey.currentState.showSnackBar(SnackBar(
+            duration: Duration(days: 1),
+            content: FullScreenSnackBar(
+              icon: Icons.thumb_up,
+              genericText: "Hi $compressedEmail, Please Verify Your Email ",
+              inkButtonText: "<- To Login",
+              function: () {
+                MaterialPageRoute route =
+                    MaterialPageRoute(builder: (context) => Login());
+                Navigator.of(context).pushReplacement(route);
+              },
+            ),
+          ));
+          break;
+      }
+    });
+  }
+
+  User user = new User();
+
   @override
   Widget build(BuildContext context) {
     SizeConfig().init(context);
-    final _formKey = GlobalKey<FormState>();
     return Scaffold(
+      key: _scaffoldKey,
       resizeToAvoidBottomInset: false,
       body: Container(
         padding: EdgeInsets.fromLTRB(
@@ -44,7 +208,7 @@ class Login extends StatelessWidget {
                           child: Container(
                             height: SizeConfig.blockSizeVertical * 7.2,
                             width: SizeConfig.blockSizeHorizontal * 72,
-                            child: TextField(
+                            child: TextFormField(
                               keyboardType: TextInputType.emailAddress,
                               decoration: new InputDecoration(
                                 contentPadding: EdgeInsets.fromLTRB(
@@ -59,6 +223,18 @@ class Login extends StatelessWidget {
                                 ),
                                 hintText: "example@email.com",
                               ),
+                              validator: (String value) {
+                                if (value.isEmpty) {
+                                  return "Cannot be empty";
+                                } else if (!isValidEmail(value)) {
+                                  return 'Invalid Email';
+                                } else {
+                                  setState(() {
+                                    User.email = value;
+                                  });
+                                  return null;
+                                }
+                              },
                             ),
                           ),
                         ),
@@ -71,7 +247,7 @@ class Login extends StatelessWidget {
                           child: Container(
                             height: SizeConfig.blockSizeVertical * 7.2,
                             width: SizeConfig.blockSizeHorizontal * 72,
-                            child: TextField(
+                            child: TextFormField(
                               keyboardType: TextInputType.visiblePassword,
                               decoration: new InputDecoration(
                                   contentPadding: EdgeInsets.fromLTRB(
@@ -85,6 +261,16 @@ class Login extends StatelessWidget {
                                     ),
                                   ),
                                   hintText: "*******"),
+                              validator: (String value) {
+                                if (value.isEmpty) {
+                                  return 'Please enter your password';
+                                } else {
+                                  setState(() {
+                                    User.password = value;
+                                  });
+                                }
+                                return null;
+                              },
                             ),
                           ),
                         ),
@@ -113,7 +299,13 @@ class Login extends StatelessWidget {
                                         color: Colors.white, fontSize: 20)),
                               ),
                               padding: const EdgeInsets.all(15.0)),
-                          onPressed: null,
+                          onPressed: () {
+                            if (_formKey.currentState.validate()) {
+                              signInUser(User.email, User.password);
+                            } else {
+                              print("Not Valid");
+                            }
+                          },
                         ),
                       ],
                     ),
@@ -137,5 +329,11 @@ class Login extends StatelessWidget {
         )),
       ),
     );
+  }
+
+  bool isValidEmail(String input) {
+    final RegExp regex = new RegExp(
+        r"^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,253}[a-zA-Z0-9])?(?:\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,253}[a-zA-Z0-9])?)*$");
+    return regex.hasMatch(input);
   }
 }

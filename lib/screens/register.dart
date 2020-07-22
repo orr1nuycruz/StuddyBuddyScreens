@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:studdyBuddyScreens/model/BaseAuth.dart';
 import 'package:studdyBuddyScreens/model/user.dart';
-import 'package:studdyBuddyScreens/sharedWidgets/mascotImage.dart';
 import 'package:hexcolor/hexcolor.dart';
 import 'package:studdyBuddyScreens/sharedWidgets/sizeConfig.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
@@ -43,6 +42,7 @@ class _RegisterState extends State<Register> {
             //     MaterialPageRoute(builder: (context) => Login());
             // Navigator.of(context).push(route).then((value) => _formKey.currentState.reset());
             Navigator.of(context).pop();
+            _formKey.currentState.reset();
           },
         ),
       ));
