@@ -7,6 +7,8 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/services.dart';
 import 'package:studdyBuddyScreens/sharedWidgets/fullScreenSnackBar.dart';
 
+import 'Login.dart';
+
 class Register extends StatefulWidget {
   @override
   _RegisterState createState() => _RegisterState();
@@ -38,11 +40,11 @@ class _RegisterState extends State<Register> {
           genericText: "Hi ${User.firstName}, Please Verify Your Email ",
           inkButtonText: "<- To Login",
           function: () {
-            // MaterialPageRoute route =
-            //     MaterialPageRoute(builder: (context) => Login());
-            // Navigator.of(context).push(route).then((value) => _formKey.currentState.reset());
-            Navigator.of(context).pop();
-            _formKey.currentState.reset();
+            MaterialPageRoute route =
+                MaterialPageRoute(builder: (context) => Login());
+            Navigator.of(context)
+                .pushReplacement(route)
+                .then((value) => _formKey.currentState.reset());
           },
         ),
       ));

@@ -177,79 +177,40 @@ class _LoginState extends State<Login> {
       body: Container(
         padding: EdgeInsets.fromLTRB(
             SizeConfig.safeBlockHorizontal * 0,
-            SizeConfig.safeBlockVertical * 5,
+            SizeConfig.safeBlockVertical * 3,
             SizeConfig.safeBlockHorizontal * 0,
             SizeConfig.safeBlockVertical * 5),
         child: Center(
-            child: SingleChildScrollView(
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-            children: <Widget>[
-              MascotImage(size: SizeConfig.blockSizeHorizontal * 50),
-              Text(
-                "Greetings!",
-                style: TextStyle(
-                    fontFamily: 'Open-Sans',
-                    fontSize: SizeConfig.safeBlockHorizontal * 10.5,
-                    fontWeight: FontWeight.bold),
-              ),
-              SizedBox(height: SizeConfig.blockSizeVertical * 4.5),
-              Form(
-                key: _formKey,
-                child: Container(
-                  child: Center(
-                    child: Column(
-                      children: <Widget>[
-                        Material(
-                          borderRadius: const BorderRadius.all(
-                            const Radius.circular(30.0),
-                          ),
-                          elevation: 3,
-                          child: Container(
-                            height: SizeConfig.blockSizeVertical * 7.2,
-                            width: SizeConfig.blockSizeHorizontal * 72,
-                            child: TextFormField(
-                              keyboardType: TextInputType.emailAddress,
-                              decoration: new InputDecoration(
-                                contentPadding: EdgeInsets.fromLTRB(
-                                    SizeConfig.safeBlockHorizontal * 4,
-                                    SizeConfig.safeBlockVertical * 3,
-                                    0,
-                                    SizeConfig.safeBlockVertical * 2),
-                                border: new OutlineInputBorder(
-                                  borderRadius: const BorderRadius.all(
-                                    const Radius.circular(30.0),
-                                  ),
-                                ),
-                                hintText: "example@email.com",
-                              ),
-                              validator: (String value) {
-                                if (value.isEmpty) {
-                                  return "Cannot be empty";
-                                } else if (!isValidEmail(value)) {
-                                  return 'Invalid Email';
-                                } else {
-                                  setState(() {
-                                    User.email = value;
-                                  });
-                                  return null;
-                                }
-                              },
+          child: SingleChildScrollView(
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              children: <Widget>[
+                MascotImage(size: SizeConfig.blockSizeHorizontal * 50),
+                Text(
+                  "Greetings!",
+                  style: TextStyle(
+                      fontFamily: 'Open-Sans',
+                      fontSize: SizeConfig.safeBlockHorizontal * 10.5,
+                      fontWeight: FontWeight.bold),
+                ),
+                SizedBox(height: SizeConfig.blockSizeVertical * 4.5),
+                Form(
+                  key: _formKey,
+                  child: Container(
+                    child: Center(
+                      child: Column(
+                        children: <Widget>[
+                          Material(
+                            borderRadius: const BorderRadius.all(
+                              const Radius.circular(30.0),
                             ),
-                          ),
-                        ),
-                        SizedBox(height: SizeConfig.blockSizeVertical * 1.5),
-                        Material(
-                          borderRadius: const BorderRadius.all(
-                            const Radius.circular(30.0),
-                          ),
-                          elevation: 3,
-                          child: Container(
-                            height: SizeConfig.blockSizeVertical * 7.2,
-                            width: SizeConfig.blockSizeHorizontal * 72,
-                            child: TextFormField(
-                              keyboardType: TextInputType.visiblePassword,
-                              decoration: new InputDecoration(
+                            elevation: 3,
+                            child: Container(
+                              height: SizeConfig.blockSizeVertical * 7.2,
+                              width: SizeConfig.blockSizeHorizontal * 72,
+                              child: TextFormField(
+                                keyboardType: TextInputType.emailAddress,
+                                decoration: new InputDecoration(
                                   contentPadding: EdgeInsets.fromLTRB(
                                       SizeConfig.safeBlockHorizontal * 4,
                                       SizeConfig.safeBlockVertical * 3,
@@ -260,73 +221,124 @@ class _LoginState extends State<Login> {
                                       const Radius.circular(30.0),
                                     ),
                                   ),
-                                  hintText: "*******"),
-                              validator: (String value) {
-                                if (value.isEmpty) {
-                                  return 'Please enter your password';
-                                } else {
-                                  setState(() {
-                                    User.password = value;
-                                  });
-                                }
-                                return null;
-                              },
+                                  hintText: "example@email.com",
+                                ),
+                                validator: (String value) {
+                                  if (value.isEmpty) {
+                                    return "Cannot be empty";
+                                  } else if (!isValidEmail(value)) {
+                                    return 'Invalid Email';
+                                  } else {
+                                    setState(() {
+                                      User.email = value;
+                                    });
+                                    return null;
+                                  }
+                                },
+                              ),
                             ),
                           ),
-                        ),
-                        SizedBox(height: SizeConfig.blockSizeVertical * 2.5),
-                        RaisedButton(
-                          padding: const EdgeInsets.all(0.0),
-                          shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(25.0),
-                            side: BorderSide(color: Colors.white),
+                          SizedBox(height: SizeConfig.blockSizeVertical * 1.5),
+                          Material(
+                            borderRadius: const BorderRadius.all(
+                              const Radius.circular(30.0),
+                            ),
+                            elevation: 3,
+                            child: Container(
+                              height: SizeConfig.blockSizeVertical * 7.2,
+                              width: SizeConfig.blockSizeHorizontal * 72,
+                              child: TextFormField(
+                                keyboardType: TextInputType.visiblePassword,
+                                decoration: new InputDecoration(
+                                    contentPadding: EdgeInsets.fromLTRB(
+                                        SizeConfig.safeBlockHorizontal * 4,
+                                        SizeConfig.safeBlockVertical * 3,
+                                        0,
+                                        SizeConfig.safeBlockVertical * 2),
+                                    border: new OutlineInputBorder(
+                                      borderRadius: const BorderRadius.all(
+                                        const Radius.circular(30.0),
+                                      ),
+                                    ),
+                                    hintText: "*******"),
+                                validator: (String value) {
+                                  if (value.isEmpty) {
+                                    return 'Please enter your password';
+                                  } else {
+                                    setState(() {
+                                      User.password = value;
+                                    });
+                                  }
+                                  return null;
+                                },
+                              ),
+                            ),
                           ),
-                          child: Container(
-                              width: SizeConfig.blockSizeHorizontal * 35,
-                              decoration: BoxDecoration(
-                                gradient: LinearGradient(
-                                  colors: <Color>[
-                                    Hexcolor("#e4b9fa"),
-                                    Hexcolor("#d9b9fa"),
-                                    Hexcolor("#b9bffa")
-                                  ],
+                          SizedBox(height: SizeConfig.blockSizeVertical * 2.5),
+                          RaisedButton(
+                            padding: const EdgeInsets.all(0.0),
+                            shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(25.0),
+                              side: BorderSide(color: Colors.white),
+                            ),
+                            child: Container(
+                                width: SizeConfig.blockSizeHorizontal * 35,
+                                decoration: BoxDecoration(
+                                  gradient: LinearGradient(
+                                    colors: <Color>[
+                                      Hexcolor("#e4b9fa"),
+                                      Hexcolor("#d9b9fa"),
+                                      Hexcolor("#b9bffa")
+                                    ],
+                                  ),
+                                  borderRadius: BorderRadius.circular(25),
                                 ),
-                                borderRadius: BorderRadius.circular(25),
-                              ),
-                              child: Center(
-                                child: Text("Sign in",
-                                    style: TextStyle(
-                                        color: Colors.white, fontSize: 20)),
-                              ),
-                              padding: const EdgeInsets.all(15.0)),
-                          onPressed: () {
-                            if (_formKey.currentState.validate()) {
-                              signInUser(User.email, User.password);
-                            } else {
-                              print("Not Valid");
-                            }
-                          },
-                        ),
-                      ],
+                                child: Center(
+                                  child: Text("Sign in",
+                                      style: TextStyle(
+                                          color: Colors.white, fontSize: 20)),
+                                ),
+                                padding: const EdgeInsets.all(15.0)),
+                            onPressed: () {
+                              if (_formKey.currentState.validate()) {
+                                signInUser(User.email, User.password);
+                              } else {
+                                print("Not Valid");
+                              }
+                            },
+                          ),
+                        ],
+                      ),
                     ),
                   ),
                 ),
-              ),
-              SizedBox(height: SizeConfig.blockSizeVertical * 3.0),
-              RichText(
-                text: new TextSpan(children: [
-                  new TextSpan(
-                    text: "Don't have an account? ",
-                    style: new TextStyle(color: Colors.grey),
-                  ),
-                  new TextSpan(
-                      text: "Register Now!",
-                      style: new TextStyle(color: Colors.blue))
-                ]),
-              ),
-            ],
+                SizedBox(height: SizeConfig.blockSizeVertical * 3.0),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: <Widget>[
+                    Text(
+                      "Don't have an account? ",
+                      style: new TextStyle(color: Colors.grey),
+                    ),
+                    new InkWell(
+                      onTap: () {
+                        MaterialPageRoute route =
+                            MaterialPageRoute(builder: (context) => Register());
+                        Navigator.of(context).push(route);
+                      },
+                      child: new Padding(
+                        padding: new EdgeInsets.only(
+                            left: SizeConfig.safeBlockHorizontal * 1),
+                        child: new Text("Register Now!",
+                            style: new TextStyle(color: Colors.blue)),
+                      ),
+                    )
+                  ],
+                ),
+              ],
+            ),
           ),
-        )),
+        ),
       ),
     );
   }
