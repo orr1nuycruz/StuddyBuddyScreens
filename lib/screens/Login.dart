@@ -127,7 +127,7 @@ class _LoginState extends State<Login> {
     /*At this point, the user is has the correct credential
     Logged in, but can't see content
     */
-    Auth().getCurrentUser().then((firebaseUser) {
+    AuthController().getCurrentUser().then((firebaseUser) {
       switch (firebaseUser.isEmailVerified) {
         case true:
           /*Go to calendar screen */

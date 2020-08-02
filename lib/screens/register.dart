@@ -30,7 +30,7 @@ class _RegisterState extends State<Register> {
 /*Consider implementing google sign in later */
 
   void createUser() async {
-    final status = await Auth().checkUserExists(User.email);
+    final status = await AuthController().checkUserExists(User.email);
     /*If new user does not exists in the system */
     if (status == false) {
       _scaffoldKey.currentState.showSnackBar(SnackBar(
@@ -49,9 +49,9 @@ class _RegisterState extends State<Register> {
         ),
       ));
 
-      Auth()
+      AuthController()
           .signUp(User.email, User.password)
-          .then((user) => Auth().sendEmailVerification())
+          .then((user) => AuthController().sendEmailVerification())
           .catchError((onError) => print("invalid"));
 
       databaseReference.collection("MainsUsers").document(User.email).setData({

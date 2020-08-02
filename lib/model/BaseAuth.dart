@@ -13,7 +13,7 @@ abstract class BaseAuth {
   Future<bool> checkUserExists(String email);
 }
 
-class Auth implements BaseAuth {
+class AuthController implements BaseAuth {
   final FirebaseAuth _firebaseAuth = FirebaseAuth.instance;
   final Firestore _firebaseStore = Firestore.instance;
 
