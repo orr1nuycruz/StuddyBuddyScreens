@@ -10,7 +10,8 @@ class IntroPage extends StatelessWidget {
       body: Container(
         height: SizeConfig.screenHeight,
         width: SizeConfig.screenWidth,
-        padding: EdgeInsets.fromLTRB(0, 100, 0, 50),
+        padding: EdgeInsets.fromLTRB(0, SizeConfig.safeBlockVertical * 10, 0,
+            SizeConfig.safeBlockVertical * 5),
         child: Center(
           child: Column(
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
@@ -18,13 +19,14 @@ class IntroPage extends StatelessWidget {
               Text("Hello Buddy!",
                   style: TextStyle(
                       fontFamily: 'Open-Sans',
-                      fontSize: SizeConfig.safeBlockHorizontal*10.5,
+                      fontSize: SizeConfig.safeBlockHorizontal * 10.5,
                       fontWeight: FontWeight.bold)),
-              MascotImage(size: SizeConfig.blockSizeHorizontal * 60,),
+              MascotImage(
+                size: SizeConfig.blockSizeHorizontal * 60,
+              ),
               SizedBox(
                 height: SizeConfig.blockSizeVertical * 10,
               )
-
             ],
           ),
         ),

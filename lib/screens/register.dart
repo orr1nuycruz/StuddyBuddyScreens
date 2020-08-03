@@ -107,8 +107,9 @@ class _RegisterState extends State<Register> {
               GestureDetector(
                 onTap: () {},
                 child: Material(
-                  borderRadius:
-                      const BorderRadius.all(const Radius.circular(80.0)),
+                  borderRadius: BorderRadius.all(
+                    Radius.circular(SizeConfig.blockSizeVertical * 7.5),
+                  ),
                   elevation: 5,
                   child: CircleAvatar(
                     backgroundColor: Colors.white,
@@ -139,8 +140,8 @@ class _RegisterState extends State<Register> {
                     child: Column(
                       children: <Widget>[
                         Material(
-                          borderRadius: const BorderRadius.all(
-                            const Radius.circular(30.0),
+                          borderRadius: BorderRadius.all(
+                            Radius.circular(SizeConfig.blockSizeVertical * 3.5),
                           ),
                           elevation: 3,
                           child: Container(
@@ -153,8 +154,9 @@ class _RegisterState extends State<Register> {
                                       left: SizeConfig.safeBlockHorizontal * 6),
                                   border: new OutlineInputBorder(
                                     borderSide: BorderSide(color: Colors.white),
-                                    borderRadius: const BorderRadius.all(
-                                      const Radius.circular(30.0),
+                                    borderRadius: BorderRadius.all(
+                                      Radius.circular(
+                                          SizeConfig.blockSizeVertical * 3.5),
                                     ),
                                   ),
                                   hintText: "First Name"),
@@ -173,8 +175,8 @@ class _RegisterState extends State<Register> {
                         ),
                         SizedBox(height: SizeConfig.safeBlockVertical * 2),
                         Material(
-                          borderRadius: const BorderRadius.all(
-                            const Radius.circular(30.0),
+                          borderRadius: BorderRadius.all(
+                            Radius.circular(SizeConfig.blockSizeVertical * 3.5),
                           ),
                           elevation: 3,
                           child: Container(
@@ -187,8 +189,9 @@ class _RegisterState extends State<Register> {
                                       left: SizeConfig.safeBlockHorizontal * 6),
                                   border: new OutlineInputBorder(
                                     borderSide: BorderSide(color: Colors.white),
-                                    borderRadius: const BorderRadius.all(
-                                      const Radius.circular(30.0),
+                                    borderRadius: BorderRadius.all(
+                                      Radius.circular(
+                                          SizeConfig.blockSizeVertical * 3.5),
                                     ),
                                   ),
                                   hintText: "Last Name"),
@@ -207,8 +210,8 @@ class _RegisterState extends State<Register> {
                         ),
                         SizedBox(height: SizeConfig.safeBlockVertical * 2),
                         Material(
-                          borderRadius: const BorderRadius.all(
-                            const Radius.circular(30.0),
+                          borderRadius: BorderRadius.all(
+                            Radius.circular(SizeConfig.blockSizeVertical * 3.5),
                           ),
                           elevation: 3,
                           child: Container(
@@ -221,8 +224,9 @@ class _RegisterState extends State<Register> {
                                       left: SizeConfig.safeBlockHorizontal * 6),
                                   border: new OutlineInputBorder(
                                     borderSide: BorderSide(color: Colors.white),
-                                    borderRadius: const BorderRadius.all(
-                                      const Radius.circular(30.0),
+                                    borderRadius: BorderRadius.all(
+                                      Radius.circular(
+                                          SizeConfig.blockSizeVertical * 3.5),
                                     ),
                                   ),
                                   hintText: "Email Address"),
@@ -243,8 +247,8 @@ class _RegisterState extends State<Register> {
                         ),
                         SizedBox(height: SizeConfig.safeBlockVertical * 2),
                         Material(
-                          borderRadius: const BorderRadius.all(
-                            const Radius.circular(30.0),
+                          borderRadius: BorderRadius.all(
+                            Radius.circular(SizeConfig.blockSizeVertical * 3.5),
                           ),
                           elevation: 3,
                           child: Container(
@@ -258,8 +262,9 @@ class _RegisterState extends State<Register> {
                                       left: SizeConfig.safeBlockHorizontal * 6),
                                   border: new OutlineInputBorder(
                                     borderSide: BorderSide(color: Colors.white),
-                                    borderRadius: const BorderRadius.all(
-                                      const Radius.circular(30.0),
+                                    borderRadius: BorderRadius.all(
+                                      Radius.circular(
+                                          SizeConfig.blockSizeVertical * 3.5),
                                     ),
                                   ),
                                   hintText: "Password"),
@@ -280,8 +285,8 @@ class _RegisterState extends State<Register> {
                         ),
                         SizedBox(height: SizeConfig.safeBlockVertical * 2),
                         Material(
-                          borderRadius: const BorderRadius.all(
-                            const Radius.circular(30.0),
+                          borderRadius: BorderRadius.all(
+                            Radius.circular(SizeConfig.blockSizeVertical * 3.5),
                           ),
                           elevation: 3,
                           child: Container(
@@ -295,8 +300,9 @@ class _RegisterState extends State<Register> {
                                       left: SizeConfig.safeBlockHorizontal * 6),
                                   border: new OutlineInputBorder(
                                     borderSide: BorderSide(color: Colors.white),
-                                    borderRadius: const BorderRadius.all(
-                                      const Radius.circular(30.0),
+                                    borderRadius: BorderRadius.all(
+                                      Radius.circular(
+                                          SizeConfig.blockSizeVertical * 3.5),
                                     ),
                                   ),
                                   hintText: "Confirm Password"),
@@ -320,8 +326,9 @@ class _RegisterState extends State<Register> {
                           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                           children: <Widget>[
                             Material(
-                              borderRadius: const BorderRadius.all(
-                                const Radius.circular(30.0),
+                              borderRadius: BorderRadius.all(
+                                Radius.circular(
+                                    SizeConfig.blockSizeVertical * 3.5),
                               ),
                               elevation: 3,
                               child: Container(
@@ -336,8 +343,10 @@ class _RegisterState extends State<Register> {
                                       border: new OutlineInputBorder(
                                         borderSide:
                                             BorderSide(color: Colors.white),
-                                        borderRadius: const BorderRadius.all(
-                                          const Radius.circular(30.0),
+                                        borderRadius: BorderRadius.all(
+                                          Radius.circular(
+                                              SizeConfig.blockSizeVertical *
+                                                  3.5),
                                         ),
                                       ),
                                       hintText: "Age"),
@@ -355,8 +364,9 @@ class _RegisterState extends State<Register> {
                               ),
                             ),
                             Material(
-                              borderRadius: const BorderRadius.all(
-                                const Radius.circular(30.0),
+                              borderRadius: BorderRadius.all(
+                                Radius.circular(
+                                    SizeConfig.blockSizeVertical * 3.5),
                               ),
                               elevation: 3,
                               child: Container(
@@ -364,8 +374,9 @@ class _RegisterState extends State<Register> {
                                 width: SizeConfig.blockSizeHorizontal * 38,
                                 decoration: BoxDecoration(
                                   border: Border.all(color: Colors.grey),
-                                  borderRadius: const BorderRadius.all(
-                                    const Radius.circular(30.0),
+                                  borderRadius: BorderRadius.all(
+                                    Radius.circular(
+                                        SizeConfig.blockSizeVertical * 3.5),
                                   ),
                                 ),
                                 child: Padding(
@@ -399,8 +410,8 @@ class _RegisterState extends State<Register> {
                         ),
                         SizedBox(height: SizeConfig.safeBlockVertical * 2),
                         Material(
-                          borderRadius: const BorderRadius.all(
-                            const Radius.circular(30.0),
+                          borderRadius: BorderRadius.all(
+                            Radius.circular(SizeConfig.blockSizeVertical * 3.5),
                           ),
                           elevation: 3,
                           child: Container(
@@ -413,8 +424,9 @@ class _RegisterState extends State<Register> {
                                       left: SizeConfig.safeBlockHorizontal * 6),
                                   border: new OutlineInputBorder(
                                     borderSide: BorderSide(color: Colors.white),
-                                    borderRadius: const BorderRadius.all(
-                                      const Radius.circular(30.0),
+                                    borderRadius: BorderRadius.all(
+                                      Radius.circular(
+                                          SizeConfig.blockSizeVertical * 3.5),
                                     ),
                                   ),
                                   hintText: "Enter City"),
@@ -459,7 +471,10 @@ class _RegisterState extends State<Register> {
                         RaisedButton(
                           padding: const EdgeInsets.all(0.0),
                           shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(30.0),
+                            borderRadius: BorderRadius.all(
+                              Radius.circular(
+                                  SizeConfig.blockSizeVertical * 3.5),
+                            ),
                             side: BorderSide(color: Colors.white),
                           ),
                           child: Container(
@@ -472,7 +487,10 @@ class _RegisterState extends State<Register> {
                                     Hexcolor("#b9bffa")
                                   ],
                                 ),
-                                borderRadius: BorderRadius.circular(30),
+                                borderRadius: BorderRadius.all(
+                                  Radius.circular(
+                                      SizeConfig.blockSizeVertical * 3.5),
+                                ),
                               ),
                               child: Center(
                                 child: Text("REGISTER",

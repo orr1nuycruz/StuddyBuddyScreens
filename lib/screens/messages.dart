@@ -33,8 +33,9 @@ class _MessageListState extends State<MessageList> {
                 GestureDetector(
                   onTap: () {},
                   child: Material(
-                    borderRadius:
-                        const BorderRadius.all(const Radius.circular(80.0)),
+                    borderRadius: BorderRadius.all(
+                      Radius.circular(SizeConfig.blockSizeVertical * 4.2),
+                    ),
                     elevation: 5,
                     child: CircleAvatar(
                       backgroundImage: AssetImage(user.image),
@@ -109,8 +110,8 @@ class _MessageListState extends State<MessageList> {
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: <Widget>[
                   Material(
-                    borderRadius: const BorderRadius.all(
-                      const Radius.circular(25.0),
+                    borderRadius: BorderRadius.all(
+                      Radius.circular(SizeConfig.blockSizeVertical * 3.5),
                     ),
                     elevation: 3,
                     child: Container(
@@ -123,8 +124,9 @@ class _MessageListState extends State<MessageList> {
                               SizeConfig.safeBlockVertical * 2, 0, 0, 0),
                           prefixIcon: Icon(Icons.search),
                           border: new OutlineInputBorder(
-                            borderRadius: const BorderRadius.all(
-                              const Radius.circular(25.0),
+                            borderRadius: BorderRadius.all(
+                              Radius.circular(
+                                  SizeConfig.blockSizeVertical * 3.5),
                             ),
                           ),
                           hintText: "Search",
@@ -139,8 +141,9 @@ class _MessageListState extends State<MessageList> {
                   GestureDetector(
                     onTap: () {},
                     child: Material(
-                      borderRadius:
-                          const BorderRadius.all(const Radius.circular(80.0)),
+                      borderRadius: BorderRadius.all(
+                        Radius.circular(SizeConfig.blockSizeVertical * 4.2),
+                      ),
                       elevation: 5,
                       child: CircleAvatar(
                         backgroundColor: Colors.white,

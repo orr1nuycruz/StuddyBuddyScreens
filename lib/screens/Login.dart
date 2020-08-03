@@ -23,7 +23,7 @@ class _LoginState extends State<Login> {
 
     //Sign in
     try {
-      await Auth().signIn(email, password);
+      await AuthController().signIn(email, password);
     } on PlatformException catch (e) {
       switch (e.code) {
         case "ERROR_WRONG_PASSWORD":
@@ -120,7 +120,7 @@ class _LoginState extends State<Login> {
                 }),
           ));
 
-          return print("Unknwon reason");
+          return print("Unknown reason");
           break;
       }
     }
@@ -201,8 +201,9 @@ class _LoginState extends State<Login> {
                       child: Column(
                         children: <Widget>[
                           Material(
-                            borderRadius: const BorderRadius.all(
-                              const Radius.circular(30.0),
+                            borderRadius: BorderRadius.all(
+                              Radius.circular(
+                                  SizeConfig.blockSizeVertical * 20),
                             ),
                             elevation: 3,
                             child: Container(
@@ -217,8 +218,9 @@ class _LoginState extends State<Login> {
                                       0,
                                       SizeConfig.safeBlockVertical * 2),
                                   border: new OutlineInputBorder(
-                                    borderRadius: const BorderRadius.all(
-                                      const Radius.circular(30.0),
+                                    borderRadius: BorderRadius.all(
+                                      Radius.circular(
+                                          SizeConfig.blockSizeVertical * 20),
                                     ),
                                   ),
                                   hintText: "example@email.com",
@@ -240,8 +242,9 @@ class _LoginState extends State<Login> {
                           ),
                           SizedBox(height: SizeConfig.blockSizeVertical * 1.5),
                           Material(
-                            borderRadius: const BorderRadius.all(
-                              const Radius.circular(30.0),
+                            borderRadius: BorderRadius.all(
+                              Radius.circular(
+                                  SizeConfig.blockSizeVertical * 20),
                             ),
                             elevation: 3,
                             child: Container(
@@ -256,8 +259,9 @@ class _LoginState extends State<Login> {
                                         0,
                                         SizeConfig.safeBlockVertical * 2),
                                     border: new OutlineInputBorder(
-                                      borderRadius: const BorderRadius.all(
-                                        const Radius.circular(30.0),
+                                      borderRadius: BorderRadius.all(
+                                        Radius.circular(
+                                            SizeConfig.blockSizeVertical * 20),
                                       ),
                                     ),
                                     hintText: "*******"),
@@ -278,7 +282,10 @@ class _LoginState extends State<Login> {
                           RaisedButton(
                             padding: const EdgeInsets.all(0.0),
                             shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(25.0),
+                              borderRadius: BorderRadius.all(
+                                Radius.circular(
+                                    SizeConfig.blockSizeVertical * 20),
+                              ),
                               side: BorderSide(color: Colors.white),
                             ),
                             child: Container(
@@ -291,14 +298,18 @@ class _LoginState extends State<Login> {
                                       Hexcolor("#b9bffa")
                                     ],
                                   ),
-                                  borderRadius: BorderRadius.circular(25),
+                                  borderRadius: BorderRadius.all(
+                                    Radius.circular(
+                                        SizeConfig.blockSizeVertical * 20),
+                                  ),
                                 ),
                                 child: Center(
                                   child: Text("Sign in",
                                       style: TextStyle(
                                           color: Colors.white, fontSize: 20)),
                                 ),
-                                padding: const EdgeInsets.all(15.0)),
+                                padding: EdgeInsets.all(
+                                    SizeConfig.safeBlockHorizontal * 3.5)),
                             onPressed: () {
                               if (_formKey.currentState.validate()) {
                                 signInUser(User.email, User.password);

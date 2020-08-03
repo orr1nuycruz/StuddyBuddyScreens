@@ -46,7 +46,9 @@ class Maintenance extends StatelessWidget {
               RaisedButton(
                 padding: const EdgeInsets.all(0.0),
                 shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(45.0),
+                  borderRadius: BorderRadius.all(
+                    Radius.circular(SizeConfig.blockSizeVertical * 3.5),
+                  ),
                   side: BorderSide(color: Colors.white),
                 ),
                 child: Container(
@@ -59,7 +61,9 @@ class Maintenance extends StatelessWidget {
                           Hexcolor("#b9bffa")
                         ],
                       ),
-                      borderRadius: BorderRadius.circular(45),
+                      borderRadius: BorderRadius.all(
+                        Radius.circular(SizeConfig.blockSizeVertical * 3.5),
+                      ),
                     ),
                     child: Center(
                       child: Text("Continue",
