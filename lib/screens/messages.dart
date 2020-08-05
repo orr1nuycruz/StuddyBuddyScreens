@@ -17,7 +17,6 @@ class _MessageListState extends State<MessageList> {
   Widget userCard(TestUser user, BuildContext context) {
     return InkWell(
       child: Container(
-        decoration: BoxDecoration(),
         width: SizeConfig.blockSizeHorizontal * 100,
         height: SizeConfig.blockSizeVertical * 12.62,
         child: Card(

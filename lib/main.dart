@@ -4,6 +4,8 @@ import 'package:studdyBuddyScreens/screens/Login.dart';
 import 'package:studdyBuddyScreens/screens/intro.dart';
 import 'package:studdyBuddyScreens/screens/maintenance.dart';
 import 'package:studdyBuddyScreens/screens/messages.dart';
+import 'package:studdyBuddyScreens/screens/preferences/question01.dart';
+import 'package:studdyBuddyScreens/screens/preferences/question02.dart';
 import 'package:studdyBuddyScreens/screens/register.dart';
 import 'package:studdyBuddyScreens/sharedWidgets/sizeConfig.dart';
 
@@ -15,7 +17,7 @@ class MyApp extends StatelessWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(title: 'StuddyBuddyTest', home: BottomNavigatorPage());
+    return MaterialApp(title: 'StuddyBuddyTest', home: Question01());
   }
 }
 // IntroPage(),
