@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:hexcolor/hexcolor.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:studdyBuddyScreens/screens/preferences/question01.dart';
+import 'package:studdyBuddyScreens/screens/preferences/question03.dart';
 import 'package:studdyBuddyScreens/sharedWidgets/sizeConfig.dart';
 
 class Question02 extends StatefulWidget {
@@ -29,20 +30,19 @@ class _Question02State extends State<Question02> with TickerProviderStateMixin {
     setState(() => _selectedIndex = index);
   }
 
-  void printansweragain() async {
-    SharedPreferences prefs2 = await SharedPreferences.getInstance();
-    setState(() => strAnswer = prefs2.getString('answer01'));
-  }
-
   void getUserInfo() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
-    setState(() => list = prefs.getStringList('userInfo'));
+    setState(() => list = prefs.getStringList('userInfo') ?? null);
+  }
+
+  void getAnswer02(var obj) async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    await prefs.setString('answer02', obj);
   }
 
   @override
   void initState() {
     super.initState();
-    printansweragain();
     getUserInfo();
     controller = AnimationController(
         duration: const Duration(milliseconds: 1000), vsync: this);
@@ -97,8 +97,16 @@ class _Question02State extends State<Question02> with TickerProviderStateMixin {
       ),
       onTap: () {
         setState(() => _onSelected(index));
-        Timer timer = new Timer(new Duration(milliseconds: 500), () {
-          print(obj);
+        print(obj);
+        getAnswer02(obj);
+        Timer timer = new Timer(new Duration(milliseconds: 200), () {
+          Navigator.of(context).push(
+            PageRouteBuilder(
+              pageBuilder: (context, animation, secondaryAnimation) {
+                return Question03();
+              },
+            ),
+          );
         });
       },
     );
@@ -209,8 +217,7 @@ class _Question02State extends State<Question02> with TickerProviderStateMixin {
                     padding: EdgeInsets.only(
                         left: SizeConfig.safeBlockHorizontal * 5),
                     child: Text(
-                      "What is your reason for using \nthis app? \n" +
-                          strAnswer,
+                      "What is your reason for using \nthis app? \n",
                       style: TextStyle(
                           fontSize: SizeConfig.safeBlockHorizontal * 5,
                           fontWeight: FontWeight.bold),
@@ -257,9 +264,13 @@ class _Question02State extends State<Question02> with TickerProviderStateMixin {
                     padding:
                         EdgeInsets.all(SizeConfig.safeBlockHorizontal * 3)),
                 onPressed: () {
-                  MaterialPageRoute route =
-                      MaterialPageRoute(builder: (context) => Question01());
-                  Navigator.of(context).pushReplacement(route);
+                  Navigator.of(context).pushReplacement(
+                    PageRouteBuilder(
+                      pageBuilder: (context, animation, secondaryAnimation) {
+                        return Question01();
+                      },
+                    ),
+                  );
                 },
               ),
             ],
