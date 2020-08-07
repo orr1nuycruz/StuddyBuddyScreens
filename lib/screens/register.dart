@@ -2,12 +2,13 @@ import 'package:flutter/material.dart';
 import 'package:studdyBuddyScreens/model/BaseAuth.dart';
 import 'package:studdyBuddyScreens/model/user.dart';
 import 'package:hexcolor/hexcolor.dart';
+import 'package:studdyBuddyScreens/screens/preferences/question01.dart';
 import 'package:studdyBuddyScreens/sharedWidgets/sizeConfig.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/services.dart';
 import 'package:studdyBuddyScreens/sharedWidgets/fullScreenSnackBar.dart';
-
 import 'Login.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class Register extends StatefulWidget {
   @override
@@ -18,6 +19,9 @@ class _RegisterState extends State<Register> {
   final _formKey = GlobalKey<FormState>();
   String initialPassword = null;
   bool _isChecked = false;
+
+  List<String> list = new List();
+  String user;
 
   final databaseReference = Firestore.instance;
 
@@ -85,6 +89,11 @@ class _RegisterState extends State<Register> {
             }),
       ));
     }
+  }
+
+  void nextPage() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    await prefs.setStringList('userInfo', list);
   }
 
   final _scaffoldKey = GlobalKey<ScaffoldState>();
@@ -463,6 +472,15 @@ class _RegisterState extends State<Register> {
                             onChanged: (val) {
                               setState(() {
                                 _isChecked = val;
+                                list.addAll([
+                                  User.email,
+                                  User.password,
+                                  User.firstName,
+                                  User.lastName,
+                                  User.age.toString(),
+                                  User.gender,
+                                  User.city
+                                ]);
                               });
                             },
                           ),
@@ -513,7 +531,11 @@ class _RegisterState extends State<Register> {
                                       "\n ${User.age}"
                                       "\n ${User.gender}"
                                       "\n ${User.city}");
-                              createUser();
+                              //createUser();
+                              nextPage();
+                              MaterialPageRoute route = MaterialPageRoute(
+                                  builder: (context) => Question01());
+                              Navigator.of(context).push(route);
                             } else {
                               print(
                                   "Make sure to check the terms and conditions");

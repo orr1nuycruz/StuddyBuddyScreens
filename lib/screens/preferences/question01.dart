@@ -1,18 +1,20 @@
 import 'dart:async';
 import 'package:flutter/material.dart';
+import 'package:hexcolor/hexcolor.dart';
 import 'package:studdyBuddyScreens/screens/preferences/question02.dart';
 import 'package:studdyBuddyScreens/sharedWidgets/sizeConfig.dart';
+import 'package:shared_preferences/shared_preferences.dart';
+import '../register.dart';
 
 class Question01 extends StatefulWidget {
   @override
   _Question01State createState() => _Question01State();
-  Function function;
-  Question01({this.function});
 }
 
 class _Question01State extends State<Question01> with TickerProviderStateMixin {
   static var answers = ['Soda', 'Fruit Juice', 'Coffee', 'Water'];
   int _selectedIndex = null;
+  List<String> list = new List();
 
   _onSelected(int index) {
     setState(() => _selectedIndex = index);
@@ -21,9 +23,20 @@ class _Question01State extends State<Question01> with TickerProviderStateMixin {
   AnimationController controller;
   Animation<double> animation;
 
+  void getAnswer01(var obj) async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    await prefs.setString('answer01', obj);
+  }
+
+  void getUserInfo() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    setState(() => list = prefs.getStringList('userInfo'));
+  }
+
   @override
   void initState() {
     super.initState();
+    getUserInfo();
     controller = AnimationController(
         duration: const Duration(milliseconds: 1000), vsync: this);
     animation = CurvedAnimation(parent: controller, curve: Curves.easeIn);
@@ -78,10 +91,8 @@ class _Question01State extends State<Question01> with TickerProviderStateMixin {
       onTap: () {
         setState(() => _onSelected(index));
         print(obj);
+        getAnswer01(obj);
         Timer timer = new Timer(new Duration(milliseconds: 200), () {
-          // MaterialPageRoute route =
-          //     MaterialPageRoute(builder: (context) => Question02());
-          // Navigator.of(context).push(route);
           Navigator.of(context).push(
             PageRouteBuilder(
               pageBuilder: (context, animation, secondaryAnimation) {
@@ -99,7 +110,9 @@ class _Question01State extends State<Question01> with TickerProviderStateMixin {
     SizeConfig().init(context);
     return Scaffold(
       body: Container(
-        padding: EdgeInsets.only(top: SizeConfig.safeBlockVertical * 10),
+        padding: EdgeInsets.only(
+            top: SizeConfig.safeBlockVertical * 10,
+            bottom: SizeConfig.safeBlockVertical * 10),
         child: Center(
           child: Column(
             children: <Widget>[
@@ -109,7 +122,7 @@ class _Question01State extends State<Question01> with TickerProviderStateMixin {
                     padding: EdgeInsets.only(
                         left: SizeConfig.safeBlockHorizontal * 5),
                     child: Text(
-                      "Tell us about\n" + "yourself?",
+                      "Tell us about\n" + "yourself?\n" + list[3],
                       style: TextStyle(
                           fontSize: SizeConfig.safeBlockHorizontal * 8,
                           fontWeight: FontWeight.bold),
@@ -218,7 +231,43 @@ class _Question01State extends State<Question01> with TickerProviderStateMixin {
                     return userCard(answers[i], i, context);
                   },
                 ),
-              )
+              ),
+              RaisedButton(
+                padding: const EdgeInsets.all(0.0),
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.all(
+                    Radius.circular(SizeConfig.blockSizeVertical * 3.5),
+                  ),
+                  side: BorderSide(color: Colors.white),
+                ),
+                child: Container(
+                    width: SizeConfig.blockSizeHorizontal * 40,
+                    decoration: BoxDecoration(
+                      gradient: LinearGradient(
+                        colors: <Color>[
+                          Hexcolor("#e4b9fa"),
+                          Hexcolor("#d9b9fa"),
+                          Hexcolor("#b9bffa")
+                        ],
+                      ),
+                      borderRadius: BorderRadius.all(
+                        Radius.circular(SizeConfig.blockSizeVertical * 3.5),
+                      ),
+                    ),
+                    child: Center(
+                      child: Text("Go Back",
+                          style: TextStyle(
+                              color: Colors.white,
+                              fontSize: SizeConfig.safeBlockHorizontal * 5)),
+                    ),
+                    padding:
+                        EdgeInsets.all(SizeConfig.safeBlockHorizontal * 3)),
+                onPressed: () {
+                  MaterialPageRoute route =
+                      MaterialPageRoute(builder: (context) => Register());
+                  Navigator.of(context).pushReplacement(route);
+                },
+              ),
             ],
           ),
         ),
