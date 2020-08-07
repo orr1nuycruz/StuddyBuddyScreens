@@ -2,6 +2,7 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:hexcolor/hexcolor.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:studdyBuddyScreens/screens/preferences/confimation.dart';
 import 'package:studdyBuddyScreens/screens/preferences/question03.dart';
 import 'package:studdyBuddyScreens/screens/preferences/question04.dart';
 import 'package:studdyBuddyScreens/sharedWidgets/sizeConfig.dart';
@@ -95,13 +96,9 @@ class _Question04State extends State<Question04> with TickerProviderStateMixin {
         print(obj);
         getAnswer04(obj);
         Timer timer = new Timer(new Duration(milliseconds: 200), () {
-          Navigator.of(context).push(
-            PageRouteBuilder(
-              pageBuilder: (context, animation, secondaryAnimation) {
-                return Question04();
-              },
-            ),
-          );
+          MaterialPageRoute route =
+              MaterialPageRoute(builder: (context) => ConfirmAccount());
+          Navigator.of(context).push(route);
         });
       },
     );
