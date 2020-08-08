@@ -244,13 +244,7 @@ class _Question03State extends State<Question03> with TickerProviderStateMixin {
                 child: Container(
                     width: SizeConfig.blockSizeHorizontal * 40,
                     decoration: BoxDecoration(
-                      gradient: LinearGradient(
-                        colors: <Color>[
-                          Hexcolor("#e4b9fa"),
-                          Hexcolor("#d9b9fa"),
-                          Hexcolor("#b9bffa")
-                        ],
-                      ),
+                      color: Colors.blue,
                       borderRadius: BorderRadius.all(
                         Radius.circular(SizeConfig.blockSizeVertical * 3.5),
                       ),
