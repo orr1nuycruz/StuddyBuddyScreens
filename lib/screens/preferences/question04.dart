@@ -17,7 +17,7 @@ class _Question04State extends State<Question04> with TickerProviderStateMixin {
 
   String strAnswer;
   int _selectedIndex = null;
-  List<String> list = new List();
+  // List<String> list = new List();
 
   AnimationController controller;
   Animation<double> animation;
@@ -31,15 +31,15 @@ class _Question04State extends State<Question04> with TickerProviderStateMixin {
     await prefs.setString('answer04', obj);
   }
 
-  void getUserInfo() async {
-    SharedPreferences prefs = await SharedPreferences.getInstance();
-    setState(() => list = prefs.getStringList('userInfo') ?? null);
-  }
+  // void getUserInfo() async {
+  //   SharedPreferences prefs = await SharedPreferences.getInstance();
+  //   setState(() => list = prefs.getStringList('userInfo') ?? null);
+  // }
 
   @override
   void initState() {
     super.initState();
-    getUserInfo();
+    // getUserInfo();
     controller = AnimationController(
         duration: const Duration(milliseconds: 1000), vsync: this);
     animation = CurvedAnimation(parent: controller, curve: Curves.easeIn);
@@ -53,7 +53,7 @@ class _Question04State extends State<Question04> with TickerProviderStateMixin {
         height: SizeConfig.blockSizeVertical * 10,
         child: Card(
           color: _selectedIndex != null && _selectedIndex == index
-              ? Colors.blue
+              ? Colors.blue[200]
               : Colors.white,
           child: Padding(
             padding: EdgeInsets.only(
@@ -64,7 +64,7 @@ class _Question04State extends State<Question04> with TickerProviderStateMixin {
               children: <Widget>[
                 Container(
                   color: _selectedIndex != null && _selectedIndex == index
-                      ? Colors.blue
+                      ? Colors.blue[200]
                       : Colors.white,
                   padding:
                       EdgeInsets.only(top: SizeConfig.safeBlockVertical * 2),
@@ -121,7 +121,7 @@ class _Question04State extends State<Question04> with TickerProviderStateMixin {
                     padding: EdgeInsets.only(
                         left: SizeConfig.safeBlockHorizontal * 5),
                     child: Text(
-                      "Tell us about\n" + "yourself? \n" + list[1],
+                      "Tell us about\n" + "yourself? \n",
                       style: TextStyle(
                           fontSize: SizeConfig.safeBlockHorizontal * 8,
                           fontWeight: FontWeight.bold),
@@ -147,7 +147,7 @@ class _Question04State extends State<Question04> with TickerProviderStateMixin {
                               SizeConfig.blockSizeHorizontal * 2),
                           bottomLeft: Radius.circular(
                               SizeConfig.blockSizeHorizontal * 2)),
-                      color: Colors.purple[100],
+                      color: Colors.blue[200],
                     ),
                   ),
                   Container(
@@ -157,7 +157,7 @@ class _Question04State extends State<Question04> with TickerProviderStateMixin {
                       border: Border.all(
                           color: Colors.grey,
                           width: SizeConfig.blockSizeHorizontal * .25),
-                      color: Colors.purple[100],
+                      color: Colors.blue[200],
                     ),
                   ),
                   Container(
@@ -167,7 +167,7 @@ class _Question04State extends State<Question04> with TickerProviderStateMixin {
                       border: Border.all(
                           color: Colors.grey,
                           width: SizeConfig.blockSizeHorizontal * .25),
-                      color: Colors.purple[100],
+                      color: Colors.blue[200],
                     ),
                   ),
                   Container(
@@ -191,14 +191,14 @@ class _Question04State extends State<Question04> with TickerProviderStateMixin {
                         height: SizeConfig.blockSizeVertical * 1,
                         decoration: BoxDecoration(
                           border: Border.all(
-                              color: Colors.purple[100],
+                              color: Colors.blue[200],
                               width: SizeConfig.blockSizeHorizontal * .25),
                           borderRadius: new BorderRadius.only(
                               topRight: Radius.circular(
                                   SizeConfig.blockSizeHorizontal * 2),
                               bottomRight: Radius.circular(
                                   SizeConfig.blockSizeHorizontal * 2)),
-                          color: Colors.purple[100],
+                          color: Colors.blue[200],
                         ),
                       ),
                     ),

@@ -472,15 +472,6 @@ class _RegisterState extends State<Register> {
                             onChanged: (val) {
                               setState(() {
                                 _isChecked = val;
-                                list.addAll([
-                                  User.email,
-                                  User.password,
-                                  User.firstName,
-                                  User.lastName,
-                                  User.age.toString(),
-                                  User.gender,
-                                  User.city
-                                ]);
                               });
                             },
                           ),
@@ -523,6 +514,15 @@ class _RegisterState extends State<Register> {
                           onPressed: () {
                             if (this._formKey.currentState.validate() &&
                                 _isChecked) {
+                              list.addAll([
+                                User.email,
+                                User.password,
+                                User.firstName,
+                                User.lastName,
+                                User.age.toString(),
+                                User.gender,
+                                User.city
+                              ]);
                               print("everything is working " +
                                   "\n ${User.firstName}"
                                       "\n ${User.lastName}"
