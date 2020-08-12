@@ -58,7 +58,7 @@ class _Question04State extends State<Question04> with TickerProviderStateMixin {
           child: Padding(
             padding: EdgeInsets.only(
                 top: SizeConfig.safeBlockVertical * 1,
-                bottom: SizeConfig.safeBlockVertical * 2,
+                bottom: SizeConfig.safeBlockVertical * 1,
                 left: SizeConfig.safeBlockHorizontal * 9),
             child: Row(
               children: <Widget>[
@@ -121,7 +121,7 @@ class _Question04State extends State<Question04> with TickerProviderStateMixin {
                     padding: EdgeInsets.only(
                         left: SizeConfig.safeBlockHorizontal * 5),
                     child: Text(
-                      "Tell us about\n" + "yourself? \n",
+                      "Tell us about\n" + "yourself?",
                       style: TextStyle(
                           fontSize: SizeConfig.safeBlockHorizontal * 8,
                           fontWeight: FontWeight.bold),
@@ -206,7 +206,7 @@ class _Question04State extends State<Question04> with TickerProviderStateMixin {
                 ],
               ),
               SizedBox(
-                height: SizeConfig.blockSizeHorizontal * 5,
+                height: SizeConfig.blockSizeHorizontal * 9,
               ),
               Row(
                 children: <Widget>[
